@@ -156,7 +156,9 @@ const FormGenerator = ({
                   name={field.name}
                   placeholder={field.placeholder}
                   onChange={value => handleChange(field.name, value)}
-                  defaultValue={field.defaultValue}
+                  defaultValue={
+                    field.defaultValue ? field.defaultValue : field.options[0]
+                  }
                 >
                   {field.options.map((item, index) => (
                     <Option key={index}>{item}</Option>

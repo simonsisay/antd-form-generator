@@ -2,11 +2,19 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import FormGenerator from "./FormGenerator";
-import { formSchema } from "./testFormSchema";
+import { formSchema } from "./sampleFormSchema";
 
 const FormGeneratorWrapper = ({ children }) => {
   let defaultValues = {};
   formSchema.forEach(field => {
+    if (
+      !field.defaultValue &&
+      (field.type === "radio" || field.type === "select")
+    ) {
+      // when a user is filling out the form if their choice is the default value
+      // and they make no interaction with the field the default value should be the one submitted.
+      defaultValues = { ...defaultValues, [field.name]: field.options[0] };
+    }
     if (field.defaultValue) {
       defaultValues = { ...defaultValues, [field.name]: field.defaultValue };
     }
