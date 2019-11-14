@@ -1,6 +1,6 @@
 import moment from "moment";
 
-export const formSchema = [
+export const sampleFormSchema = [
   {
     type: "text",
     name: "firstName",
@@ -108,8 +108,3 @@ export const formSchema = [
     }
   }
 ];
-
-export const defaultValues = {
-  firstName: "Abebe",
-  age: 20
-};
