@@ -1,9 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import FormGenerator from "./FormGenerator";
-import "./index.css";
 import "antd/dist/antd.css";
-import { sampleFormSchema } from "./sampleFormSchema";
 
 const FormGeneratorWrapper = ({ children, formSchema }) => {
   let defaultValues = {};
@@ -42,25 +39,6 @@ const AlamaForm = ({
       />
     )}
   </FormGeneratorWrapper>
-);
-
-ReactDOM.render(
-  <div className="forms">
-    <AlamaForm
-      formSchema={sampleFormSchema}
-      containerClassName={"form-container"}
-      fieldsContainerClassName={"fields"}
-      submitFormAsync={data => {
-        console.log(data);
-      }}
-      renderSubmitButton={handleSubmit => (
-        <button className="button" onClick={() => handleSubmit()}>
-          Submit
-        </button>
-      )}
-    />
-  </div>,
-  document.getElementById("root")
 );
 
 export default AlamaForm;
