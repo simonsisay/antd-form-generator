@@ -9,6 +9,7 @@ export const sampleFormSchema = [
     placeholder: "First name",
     containerClassName: null,
     label: "First name",
+    fieldProps: { disabled: false },
     validation: {
       required: true,
       errorMessage: "Please make sure your input is correct",
@@ -23,6 +24,7 @@ export const sampleFormSchema = [
     placeholder: "Age",
     containerClassName: null,
     label: "Age",
+    fieldProps: { disabled: false, style: { width: 300 } },
     validation: {
       required: true,
       errorMessage: "Please make sure your input is correct"
@@ -36,6 +38,7 @@ export const sampleFormSchema = [
     placeholder: "Age",
     containerClassName: null,
     label: "Profit",
+    fieldProps: { disabled: false, style: { width: 300 } },
     validation: {
       required: true,
       errorMessage: "Please make sure your input is correct"
@@ -49,6 +52,7 @@ export const sampleFormSchema = [
     placeholder: "Age",
     containerClassName: null,
     label: "Salary",
+    fieldProps: { disabled: false, style: { width: 300 } },
     validation: {
       required: true,
       errorMessage: "Please make sure your input is correct"
@@ -61,6 +65,7 @@ export const sampleFormSchema = [
     placeholder: "Email",
     containerClassName: null,
     label: "Email",
+    fieldProps: { disabled: false },
     validation: {
       required: true,
       errorMessage: "Please make sure your input is correct",
@@ -76,6 +81,7 @@ export const sampleFormSchema = [
     defaultValue: "Female",
     containerClassName: "input-field",
     label: "Gender",
+    fieldProps: { disabled: false },
     validation: {
       required: true,
       errorMessage: "Please make sure your input is correct"
@@ -105,6 +111,7 @@ export const sampleFormSchema = [
     validation: {
       required: true,
       errorMessage: "Please make sure your input is correct"
-    }
+    },
+    fieldProps: { disabled: false, style: { width: 300 } }
   }
 ];
