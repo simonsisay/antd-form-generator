@@ -11,9 +11,9 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactHookForm = _interopRequireDefault(require("react-hook-form"));
 
-var _antd = require("antd");
-
 require("antd/dist/antd.css");
+
+var _antd2 = require("antd");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29,14 +29,16 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var Option = _antd.Select.Option; //   types: text, number, email, money, percent, select, datepicker, radio
+var Option = _antd2.Select.Option; //   types: text, number, email, money, percent, select, datepicker, radio
 //  should populate default ant design props.
 
 var FormGenerator = function FormGenerator(_ref) {
   var formSchema = _ref.formSchema,
       defaultValues = _ref.defaultValues,
       renderSubmitButton = _ref.renderSubmitButton,
-      submitFormAsync = _ref.submitFormAsync;
+      submitFormAsync = _ref.submitFormAsync,
+      fieldsContainerClassName = _ref.fieldsContainerClassName,
+      containerClassName = _ref.containerClassName;
 
   var _useForm = (0, _reactHookForm.default)({
     mode: "onSubmit",
@@ -89,32 +91,32 @@ var FormGenerator = function FormGenerator(_ref) {
     return submitFormAsync(data);
   };
 
-  return _react.default.createElement(_antd.Form, null, _react.default.createElement("div", {
-    className: "form-container"
+  return _react.default.createElement(_antd2.Form, {
+    className: containerClassName
+  }, _react.default.createElement("div", {
+    className: fieldsContainerClassName
   }, formSchema.map(function (field, index) {
     if (field.type === "text") {
-      return _react.default.createElement(_antd.Form.Item, {
+      return _react.default.createElement(_antd2.Form.Item, {
         key: index,
         label: field.label,
         validateStatus: errors[field.name] ? "error" : "",
-        help: errors[field.name] && field.validation.errorMessage,
-        className: field.containerClassName
-      }, _react.default.createElement(_antd.Input, {
+        help: errors[field.name] && field.validation.errorMessage
+      }, _react.default.createElement(_antd2.Input, _extends({
         name: field.name,
         placeholder: field.placeholder,
         onChange: function onChange(e) {
           return handleChange(field.name, e.target.value);
         },
         defaultValue: field.defaultValue
-      }));
+      }, field.fieldProps)));
     } else if (field.type === "number") {
-      return _react.default.createElement(_antd.Form.Item, {
+      return _react.default.createElement(_antd2.Form.Item, {
         key: index,
         label: field.label,
         validateStatus: errors[field.name] ? "error" : "",
-        help: errors[field.name] && field.validation.errorMessage,
-        className: field.containerClassName
-      }, _react.default.createElement(_antd.InputNumber, {
+        help: errors[field.name] && field.validation.errorMessage
+      }, _react.default.createElement(_antd2.InputNumber, _extends({
         name: field.name,
         max: field.max,
         min: field.min,
@@ -123,15 +125,15 @@ var FormGenerator = function FormGenerator(_ref) {
           return handleChange(field.name, value);
         },
         defaultValue: field.defaultValue
-      }));
+      }, field.fieldProps)));
     } else if (field.type === "email") {
-      return _react.default.createElement(_antd.Form.Item, {
+      return _react.default.createElement(_antd2.Form.Item, {
         key: index,
         label: field.label,
         validateStatus: errors[field.name] ? "error" : "",
         help: errors[field.name] && field.validation.errorMessage,
         className: field.containerClassName
-      }, _react.default.createElement(_antd.Input, {
+      }, _react.default.createElement(_antd2.Input, _extends({
         placeholder: field.placeholder,
         type: "email",
         name: field.name,
@@ -139,15 +141,15 @@ var FormGenerator = function FormGenerator(_ref) {
           return handleChange(field.name, e.target.value);
         },
         defaultValue: field.defaultValue
-      }));
+      }, field.fieldProps)));
     } else if (field.type === "money") {
-      return _react.default.createElement(_antd.Form.Item, {
+      return _react.default.createElement(_antd2.Form.Item, {
         key: index,
         label: field.label,
         validateStatus: errors[field.name] ? "error" : "",
         help: errors[field.name] && field.validation.errorMessage,
         className: field.containerClassName
-      }, _react.default.createElement(_antd.InputNumber, {
+      }, _react.default.createElement(_antd2.InputNumber, _extends({
         name: field.name,
         formatter: function formatter(value) {
           return "$ ".concat(value).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -159,15 +161,15 @@ var FormGenerator = function FormGenerator(_ref) {
           return handleChange(field.name, value);
         },
         defaultValue: field.defaultValue
-      }));
+      }, field.fieldProps)));
     } else if (field.type === "percent") {
-      return _react.default.createElement(_antd.Form.Item, {
+      return _react.default.createElement(_antd2.Form.Item, {
         key: index,
         label: field.label,
         validateStatus: errors[field.name] ? "error" : "",
         help: errors[field.name] && field.validation.errorMessage,
         className: field.containerClassName
-      }, _react.default.createElement(_antd.InputNumber, {
+      }, _react.default.createElement(_antd2.InputNumber, _extends({
         name: field.name,
         min: 0,
         max: 100,
@@ -181,34 +183,34 @@ var FormGenerator = function FormGenerator(_ref) {
           return handleChange(field.name, value);
         },
         defaultValue: field.defaultValue
-      }));
+      }, field.fieldProps)));
     } else if (field.type === "select") {
-      return _react.default.createElement(_antd.Form.Item, {
+      return _react.default.createElement(_antd2.Form.Item, {
         key: index,
         label: field.label,
         validateStatus: errors[field.name] ? "error" : "",
         help: errors[field.name] && field.validation.errorMessage,
         className: field.containerClassName
-      }, _react.default.createElement(_antd.Select, {
+      }, _react.default.createElement(_antd2.Select, _extends({
         name: field.name,
         placeholder: field.placeholder,
         onChange: function onChange(value) {
           return handleChange(field.name, value);
         },
         defaultValue: field.defaultValue ? field.defaultValue : field.options[0]
-      }, field.options.map(function (item, index) {
-        return _react.default.createElement(Option, {
+      }, field.groupProps), field.options.map(function (item, index) {
+        return _react.default.createElement(Option, _extends({}, field.fieldProps, {
           key: index
-        }, item);
+        }), item);
       })));
     } else if (field.type === "radio") {
-      return _react.default.createElement(_antd.Form.Item, {
+      return _react.default.createElement(_antd2.Form.Item, {
         key: index,
         label: field.label,
         validateStatus: errors[field.name] ? "error" : "",
         help: errors[field.name] && field.validation && field.validation.errorMessage,
         className: field.containerClassName
-      }, _react.default.createElement(_antd.Radio.Group, _extends({
+      }, _react.default.createElement(_antd2.Radio.Group, _extends({
         name: field.name,
         onChange: function onChange(event) {
           handleChange(field.name, event.target.value);
@@ -216,35 +218,35 @@ var FormGenerator = function FormGenerator(_ref) {
         defaultValue: field.defaultValue ? field.defaultValue : field.options[0]
       }, field.groupProps), field.options.map(function (option, index) {
         if (field.groupProps && field.groupProps.buttonStyle === "solid") {
-          return _react.default.createElement(_antd.Radio.Button, {
+          return _react.default.createElement(_antd2.Radio.Button, _extends({
             key: index,
             value: option
-          }, option);
+          }, field.fieldProps), option);
         } else if (field.groupProps && field.groupProps.buttonStyle === "outline") {
-          return _react.default.createElement(_antd.Radio.Button, {
+          return _react.default.createElement(_antd2.Radio.Button, _extends({
             key: index,
             value: option
-          }, option);
+          }, field.fieldProps), option);
         }
 
-        return _react.default.createElement(_antd.Radio, _extends({
+        return _react.default.createElement(_antd2.Radio, _extends({
           key: index,
           value: option
         }, field.fieldProps), option);
       })));
     } else if (field.type === "date") {
-      return _react.default.createElement(_antd.Form.Item, {
+      return _react.default.createElement(_antd2.Form.Item, {
         key: index,
         label: field.label,
         validateStatus: errors[field.name] ? "error" : "",
         help: errors[field.name] && field.validation && field.validation.errorMessage,
         className: field.containerClassName
-      }, _react.default.createElement(_antd.DatePicker, {
+      }, _react.default.createElement(_antd2.DatePicker, _extends({
         defaultValue: field.defaultValue,
         onChange: function onChange(date) {
           return handleChange(field.name, date._d);
         }
-      }));
+      }, field.fieldProps)));
     }
 
     return null;
@@ -272,11 +274,15 @@ var FormGeneratorWrapper = function FormGeneratorWrapper(_ref2) {
 var AlamaForm = function AlamaForm(_ref3) {
   var submitFormAsync = _ref3.submitFormAsync,
       formSchema = _ref3.formSchema,
-      _renderSubmitButton = _ref3.renderSubmitButton;
+      _renderSubmitButton = _ref3.renderSubmitButton,
+      fieldsContainerClassName = _ref3.fieldsContainerClassName,
+      containerClassName = _ref3.containerClassName;
   return _react.default.createElement(FormGeneratorWrapper, {
     formSchema: formSchema
   }, function (defaultValues) {
     return _react.default.createElement(FormGenerator, {
+      fieldsContainerClassName: fieldsContainerClassName,
+      containerClassName: containerClassName,
       formSchema: formSchema,
       defaultValues: defaultValues,
       submitFormAsync: submitFormAsync,
