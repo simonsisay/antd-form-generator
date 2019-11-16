@@ -1,18 +1,20 @@
 import React, { useEffect } from "react";
 import useForm from "react-hook-form";
-import { Form, Input, Select, InputNumber, DatePicker, Radio } from "antd";
 import "antd/dist/antd.css";
+import { Form, Input, Select, InputNumber, DatePicker, Radio } from "antd";
 
 const { Option } = Select;
 
-// types: text, number, email, money, percent, select, datepicker, radio
-// should populate default ant design props.
+//   types: text, number, email, money, percent, select, datepicker, radio
+//  should populate default ant design props.
 
 const FormGenerator = ({
   formSchema,
   defaultValues,
   renderSubmitButton,
-  submitFormAsync
+  submitFormAsync,
+  fieldsContainerClassName,
+  containerClassName
 }) => {
   const {
     register,
@@ -42,12 +44,13 @@ const FormGenerator = ({
   };
 
   const submitForm = data => {
+    console.log(data);
     return submitFormAsync(data);
   };
 
   return (
-    <Form>
-      <div className="form-container">
+    <Form className={containerClassName}>
+      <div className={fieldsContainerClassName}>
         {formSchema.map((field, index) => {
           if (field.type === "text") {
             return (
@@ -56,13 +59,13 @@ const FormGenerator = ({
                 label={field.label}
                 validateStatus={errors[field.name] ? "error" : ""}
                 help={errors[field.name] && field.validation.errorMessage}
-                className={field.containerClassName}
               >
                 <Input
                   name={field.name}
                   placeholder={field.placeholder}
                   onChange={e => handleChange(field.name, e.target.value)}
                   defaultValue={field.defaultValue}
+                  {...field.fieldProps}
                 />
               </Form.Item>
             );
@@ -73,7 +76,6 @@ const FormGenerator = ({
                 label={field.label}
                 validateStatus={errors[field.name] ? "error" : ""}
                 help={errors[field.name] && field.validation.errorMessage}
-                className={field.containerClassName}
               >
                 <InputNumber
                   name={field.name}
@@ -82,6 +84,7 @@ const FormGenerator = ({
                   placeholder={field.placeholder}
                   onChange={value => handleChange(field.name, value)}
                   defaultValue={field.defaultValue}
+                  {...field.fieldProps}
                 />
               </Form.Item>
             );
@@ -100,6 +103,7 @@ const FormGenerator = ({
                   name={field.name}
                   onChange={e => handleChange(field.name, e.target.value)}
                   defaultValue={field.defaultValue}
+                  {...field.fieldProps}
                 />
               </Form.Item>
             );
@@ -120,6 +124,7 @@ const FormGenerator = ({
                   parser={value => value.replace(/\$\s?|(,*)/g, "")}
                   onChange={value => handleChange(field.name, value)}
                   defaultValue={field.defaultValue}
+                  {...field.fieldProps}
                 />
               </Form.Item>
             );
@@ -140,6 +145,7 @@ const FormGenerator = ({
                   parser={value => value.replace("%", "")}
                   onChange={value => handleChange(field.name, value)}
                   defaultValue={field.defaultValue}
+                  {...field.fieldProps}
                 />
               </Form.Item>
             );
@@ -156,10 +162,15 @@ const FormGenerator = ({
                   name={field.name}
                   placeholder={field.placeholder}
                   onChange={value => handleChange(field.name, value)}
-                  defaultValue={field.defaultValue}
+                  defaultValue={
+                    field.defaultValue ? field.defaultValue : field.options[0]
+                  }
+                  {...field.groupProps}
                 >
                   {field.options.map((item, index) => (
-                    <Option key={index}>{item}</Option>
+                    <Option {...field.fieldProps} key={index}>
+                      {item}
+                    </Option>
                   ))}
                 </Select>
               </Form.Item>
@@ -193,7 +204,11 @@ const FormGenerator = ({
                       field.groupProps.buttonStyle === "solid"
                     ) {
                       return (
-                        <Radio.Button key={index} value={option}>
+                        <Radio.Button
+                          key={index}
+                          value={option}
+                          {...field.fieldProps}
+                        >
                           {option}
                         </Radio.Button>
                       );
@@ -202,7 +217,11 @@ const FormGenerator = ({
                       field.groupProps.buttonStyle === "outline"
                     ) {
                       return (
-                        <Radio.Button key={index} value={option}>
+                        <Radio.Button
+                          key={index}
+                          value={option}
+                          {...field.fieldProps}
+                        >
                           {option}
                         </Radio.Button>
                       );
@@ -232,6 +251,7 @@ const FormGenerator = ({
                 <DatePicker
                   defaultValue={field.defaultValue}
                   onChange={date => handleChange(field.name, date._d)}
+                  {...field.fieldProps}
                 />
               </Form.Item>
             );
@@ -244,4 +264,43 @@ const FormGenerator = ({
   );
 };
 
-export default FormGenerator;
+const FormGeneratorWrapper = ({ children, formSchema }) => {
+  let defaultValues = {};
+  formSchema.forEach(field => {
+    if (
+      !field.defaultValue &&
+      (field.type === "radio" || field.type === "select")
+    ) {
+      // when a user is filling out the form if their choice is the default value
+      // and they make no interaction with the field the default value should be the one submitted.
+      defaultValues = { ...defaultValues, [field.name]: field.options[0] };
+    }
+    if (field.defaultValue) {
+      defaultValues = { ...defaultValues, [field.name]: field.defaultValue };
+    }
+  });
+  return <React.Fragment>{children(defaultValues)}</React.Fragment>;
+};
+
+const AlamaForm = ({
+  submitFormAsync,
+  formSchema,
+  renderSubmitButton,
+  fieldsContainerClassName,
+  containerClassName
+}) => (
+  <FormGeneratorWrapper formSchema={formSchema}>
+    {defaultValues => (
+      <FormGenerator
+        fieldsContainerClassName={fieldsContainerClassName}
+        containerClassName={containerClassName}
+        formSchema={formSchema}
+        defaultValues={defaultValues}
+        submitFormAsync={submitFormAsync}
+        renderSubmitButton={handleSubmit => renderSubmitButton(handleSubmit)}
+      />
+    )}
+  </FormGeneratorWrapper>
+);
+
+export default AlamaForm;

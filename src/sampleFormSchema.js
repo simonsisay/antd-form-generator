@@ -1,14 +1,14 @@
 import moment from "moment";
 
-export const formSchema = [
+export const sampleFormSchema = [
   {
     type: "text",
     name: "firstName",
     defaultValue: "Simon",
     required: true,
     placeholder: "First name",
-    containerClassName: null,
     label: "First name",
+    fieldProps: { disabled: false },
     validation: {
       required: true,
       errorMessage: "Please make sure your input is correct",
@@ -21,8 +21,8 @@ export const formSchema = [
     required: true,
     defaultValue: 21,
     placeholder: "Age",
-    containerClassName: null,
     label: "Age",
+    fieldProps: { disabled: false, style: { width: 300 } },
     validation: {
       required: true,
       errorMessage: "Please make sure your input is correct"
@@ -34,8 +34,8 @@ export const formSchema = [
     defaultValue: 20,
     required: true,
     placeholder: "Age",
-    containerClassName: null,
     label: "Profit",
+    fieldProps: { disabled: false, style: { width: 300 } },
     validation: {
       required: true,
       errorMessage: "Please make sure your input is correct"
@@ -47,8 +47,8 @@ export const formSchema = [
     defaultValue: 2000,
     required: true,
     placeholder: "Age",
-    containerClassName: null,
     label: "Salary",
+    fieldProps: { disabled: false, style: { width: 300 } },
     validation: {
       required: true,
       errorMessage: "Please make sure your input is correct"
@@ -59,8 +59,8 @@ export const formSchema = [
     name: "email",
     required: true,
     placeholder: "Email",
-    containerClassName: null,
     label: "Email",
+    fieldProps: { disabled: false },
     validation: {
       required: true,
       errorMessage: "Please make sure your input is correct",
@@ -74,8 +74,9 @@ export const formSchema = [
     placeholder: "Gender",
     required: true,
     defaultValue: "Female",
-    containerClassName: "input-field",
     label: "Gender",
+    fieldProps: { disabled: false },
+    groupProps: { allowClear: true, size: "large" },
     validation: {
       required: true,
       errorMessage: "Please make sure your input is correct"
@@ -88,14 +89,17 @@ export const formSchema = [
     defaultValue: "Female",
     placeholder: "Gender",
     required: true,
-    containerClassName: "input-field",
     label: "Gender",
     validation: {
       required: true,
       errorMessage: "Please make sure your input is correct"
     },
     groupProps: { buttonStyle: "outline", size: "large" },
-    fieldProps: { disabled: false }
+
+    fieldProps: {
+      disabled: false,
+      style: { width: 150, textAlign: "center" }
+    }
   },
   {
     type: "date",
@@ -105,11 +109,7 @@ export const formSchema = [
     validation: {
       required: true,
       errorMessage: "Please make sure your input is correct"
-    }
+    },
+    fieldProps: { disabled: false, style: { width: 300 } }
   }
 ];
-
-export const defaultValues = {
-  firstName: "Abebe",
-  age: 20
-};
