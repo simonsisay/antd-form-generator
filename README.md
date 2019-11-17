@@ -174,7 +174,7 @@ Other than that, we can pass a style object to each field inside the fieldProps 
  
 | Props             | description                                   | 
 | -------------     |-------------                                 |
-|formSchmea         | The json or array of objects of form structure|
+|formSchema         | The json or array of objects of form structure|
 |containerClassName      | a className for the the element that wraps the form fields and the submit button     |
 |fieldsContainerClassName | a className for the fields container. Usually used to layout the form fields      |
 |submitFormAsync | submitHandler for the form. Gets the user's valid inputs as an argument   |
