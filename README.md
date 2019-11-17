@@ -63,7 +63,7 @@ ReactDOM.render(
 
 ****The Schema****
 
-The form schema should have be structured like [this](https://github.com/simonsisay/react-hook-form-antdesign/blob/master/src/sampleFormSchema.js)
+The form schema should be structured like [this](https://github.com/simonsisay/react-hook-form-antdesign/blob/master/src/sampleFormSchema.js)
 
 The following are all the available types of form-fields.
 ...*
