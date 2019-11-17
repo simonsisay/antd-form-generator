@@ -138,7 +138,7 @@ Other than that, we can pass a style object to each field inside the fieldProps 
     {
       type: "number",
       name: "age",
-      fieldProps: {style: { width: 300, backgroundColor:"lightgrey", height:50, border:none } }
+      fieldProps: {style: { width: 300, backgroundColor:"lightgrey", height:50, border:"none" } }
     }
  ```
  
