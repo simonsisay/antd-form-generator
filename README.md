@@ -134,7 +134,7 @@ You can pass
 
 Other than that, we can pass a style object to each field inside the fieldProps object like
 
-```javacript
+```javascript
     {
       type: "number",
       name: "age",
