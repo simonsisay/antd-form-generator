@@ -145,7 +145,7 @@ Other than that, we can pass a style object to each field inside the fieldProps 
  
  ***Submitting form*** 
  
- The submitFormAsync prop takes a function that gets the user's inputs as an object.
+ The submitFormAsync prop takes a function that gets the user's inputs as an argument.
  
  ```
   <AlamaForm 
