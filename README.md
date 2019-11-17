@@ -134,7 +134,7 @@ You can pass
 
 Other than that, we can pass a style object to each field inside the fieldProps object like
 
-```javacript
+```javascript
     {
       type: "number",
       name: "age",
@@ -147,7 +147,7 @@ Other than that, we can pass a style object to each field inside the fieldProps 
  
  The submitFormAsync prop takes a function that gets the user's inputs as an argument.
  
- ```
+ ```javascript
   <AlamaForm 
     submitFormAsync={(data) => {
       // user's valid inputs. this function won't get fired unless all validations have passed.
