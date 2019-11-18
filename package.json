@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "antd": "^3.25.1",
+    "antd": "^3.25.2",
     "moment": "^2.24.0",
+    "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-hook-form": "^3.27.0",
