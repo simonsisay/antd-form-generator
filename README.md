@@ -144,7 +144,7 @@ The submitFormAsync prop takes a function that gets the user's inputs as an argu
 
 ```javascript
 <AlamaForm
-  submitFormAsync={data => {
+  onSubmit={data => {
     // user's valid inputs. this function won't get fired unless all validations have passed.
     console.log(data);
   }}
@@ -153,22 +153,22 @@ The submitFormAsync prop takes a function that gets the user's inputs as an argu
 
 \***_Submit Button_**
 
-Submit Button is passed as a renderProp through a prop named: renderSubmitButton
+Submit Button is passed as a renderProp through a prop named: submitButton
 This will allow you to have a button of any type, with your own customized styling and layout.
 Only exposing the click handler function for you.
 
 ```javascript
 <FormGenerator
-  renderSubmitButton={handleSubmit => (
+  submitButton={handleSubmit => (
     <MyButton onClick={() => handleSubmit()}>Submit Form</MyButton>
   )}
 />
 ```
 
-| Props              | description                                                                      |
-| ------------------ | -------------------------------------------------------------------------------- |
-| formSchema         | The json or array of objects of form structure                                   |
-| outerClassName     | a className for the the element that wraps the form fields and the submit button |
-| innerClassName     | a className for the fields container. Usually used to layout the form fields     |
-| submitFormAsync    | submitHandler for the form. Gets the user's valid inputs as an argument          |
-| renderSubmitButton | takes the submit button component as a renderProp. Example is shown above.       |
+| Props          | description                                                                      |
+| -------------- | -------------------------------------------------------------------------------- |
+| formSchema     | The json or array of objects of form structure                                   |
+| outerClassName | a className for the the element that wraps the form fields and the submit button |
+| innerClassName | a className for the fields container. Usually used to layout the form fields     |
+| onSubmit       | submitHandler for the form. Gets the user's valid inputs as an argument          |
+| submitButton   | takes the submit button component as a renderProp. Example is shown above.       |
