@@ -1,68 +1,181 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**React-hook-form-generator**
 
-## Available Scripts
 
-In the project directory, you can run:
+This is a simple library built on top of [ant-design](http://ant.design) and [react-hook-form](https://react-hook-form.com)
+That will a generate an ant design form when given a valid schema.
 
-### `yarn start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+***Usage***
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+```javascript
+import AlamaForm from 'alama-form-generator'
+ 
 
-### `yarn test`
+ReactDOM.render(
+  <AlamaForm
+    fieldsContainerClassName={"fields-container"}
+    containerClassName={"form-container"}
+    formSchema={
+      [{
+        type: "text",
+        name: "firstName",
+        defaultValue: "Simon",
+        required: true,
+        placeholder: "First name",
+        label: "First name",
+        fieldProps: { disabled: false },
+        validation: {
+          required: true,
+          errorMessage: "Please make sure your input is correct",
+          validate: value => value.toString().startsWith("A")
+        }
+        },
+        {
+          type: "number",
+          name: "age",
+          required: true,
+          defaultValue: 21,
+          placeholder: "Age",
+          label: "Age",
+          fieldProps: { disabled: false, style: { width: 300 } },
+          validation: {
+            required: true,
+            errorMessage: "Please make sure your input is correct"
+          }
+        }]
+      }
+      submitFormAsync={data => {
+        // api call done here
+          console.log(data);
+        }}
+     renderSubmitButton={handleSubmit => (
+          <button className="button" onClick={() => handleSubmit()}>
+            Submit
+          </button>
+     )}
+   />,
+   document.getElementById('root')
+);
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+****The Schema****
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The form schema should be structured like [this](https://github.com/simonsisay/react-hook-form-antdesign/blob/master/src/sampleFormSchema.js)
 
-### `yarn eject`
+The following are all the available types of form-fields.
+...*
+ - text 
+ - number 
+ - email 
+ - money
+ - percent
+ - select
+ - datepicker
+ - radio
+**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+You can pass 
+ ```javascript 
+ [
+  {
+   type: "text",  // type of field 
+    name: "firstName", // name
+    defaultValue: "Simon", // default value for the input.
+    required: true,
+    placeholder: "First name",
+    label: "First name",
+    fieldProps: { disabled: false },  // ant design props.
+    validation: {  // validation object needs to be passed like this.
+      required: true,
+      errorMessage: "Please make sure your input is correct",
+      validate: value => value.toString().startsWith("A")  // You can also pass a custom validation function.
+    }
+  },
+  {
+    type: "radio",
+    name: "gender",
+    options: ["Male", "Female"],  // this is an array of options for the radio.
+    defaultValue: "Female",
+    placeholder: "Gender",
+    required: true,
+    label: "Gender",
+    validation: {
+      required: true,
+      errorMessage: "Please make sure your input is correct"
+    },
+    groupProps: { buttonStyle: "outline", size: "large" },  
+    // prop for the options container like 
+      <Radio.Group {...field.groupProps}><Radio /></Radio.Group>
+     or
+      <Select {...field.groupProps}><Option /></Select>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    fieldProps: {  // This one is for the individual options.
+      disabled: false,
+      style: { width: 150, textAlign: "center" }
+    }
+  }
+ ]
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+****Styling***
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+ There are two props that we can pass to the component for styling
+ 
+```javascript
+  <AlamaForm 
+    // the following props are best suited to do the form layout.
+    fieldsContainerClassName={'fields-container'}  // wraps all inputs
+    containerClassName={'form-container'}  // wraps the whole form including the submit button passed as a render prop
+  />
+```
 
-## Learn More
+Other than that, we can pass a style object to each field inside the fieldProps object like
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```javascript
+    {
+      type: "number",
+      name: "age",
+      fieldProps: {style: { width: 300, backgroundColor:"lightgrey", height:50, border:"none" } }
+    }
+ ```
+ 
+ 
+ ***Submitting form*** 
+ 
+ The submitFormAsync prop takes a function that gets the user's inputs as an argument.
+ 
+ ```javascript
+  <AlamaForm 
+    submitFormAsync={(data) => {
+      // user's valid inputs. this function won't get fired unless all validations have passed.
+      console.log(data)
+    }}
+  />
+ ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+ ****Submit Button***
+ 
+ Submit Button is passed as a renderProp through a prop named: renderSubmitButton
+ This will allow you to have a button of any type, with your own customized styling and layout.
+ Only exposing the click handler function for you.
+ 
+ ```javascript
+  <AlamaForm 
+    renderSubmitButton={(handleSubmit) => (
+      <MyButton onClick={() => handleSubmit()}>Submit Form</MyButton>
+    )}
+  />
+ ```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+ 
+| Props             | description                                   | 
+| -------------     |-------------                                 |
+|formSchema         | The json or array of objects of form structure|
+|containerClassName      | a className for the the element that wraps the form fields and the submit button     |
+|fieldsContainerClassName | a className for the fields container. Usually used to layout the form fields      |
+|submitFormAsync | submitHandler for the form. Gets the user's valid inputs as an argument   |
+|renderSubmitButton | takes the submit button component as a renderProp. Example is shown above.  |
