@@ -10,8 +10,8 @@ import FormGenerator from "antd-form-generator";
 
 ReactDOM.render(
   <FormGenerator
-    fieldsContainerClassName={"fields-container"}
-    containerClassName={"form-container"}
+    innerClassName={"fields-container"}
+    outerClassName={"form-container"}
     formSchema={[
       {
         type: "text",
@@ -41,11 +41,11 @@ ReactDOM.render(
         }
       }
     ]}
-    submitFormAsync={data => {
+    onSubmit={data => {
       // api call done here
       console.log(data);
     }}
-    renderSubmitButton={handleSubmit => (
+    submitButton={handleSubmit => (
       <button className="button" onClick={() => handleSubmit()}>
         Submit
       </button>
@@ -123,8 +123,8 @@ There are two props that we can pass to the component for styling
 ```javascript
 <AlamaForm
   // the following props are best suited to do the form layout.
-  fieldsContainerClassName={"fields-container"} // wraps all inputs
-  containerClassName={"form-container"} // wraps the whole form including the submit button passed as a render prop
+  innerClassName={"fields-container"} // wraps all inputs
+  outerClassName={"form-container"} // wraps the whole form including the submit button passed as a render prop
 />
 ```
 
@@ -158,17 +158,17 @@ This will allow you to have a button of any type, with your own customized styli
 Only exposing the click handler function for you.
 
 ```javascript
-<AlamaForm
+<FormGenerator
   renderSubmitButton={handleSubmit => (
     <MyButton onClick={() => handleSubmit()}>Submit Form</MyButton>
   )}
 />
 ```
 
-| Props                    | description                                                                      |
-| ------------------------ | -------------------------------------------------------------------------------- |
-| formSchema               | The json or array of objects of form structure                                   |
-| containerClassName       | a className for the the element that wraps the form fields and the submit button |
-| fieldsContainerClassName | a className for the fields container. Usually used to layout the form fields     |
-| submitFormAsync          | submitHandler for the form. Gets the user's valid inputs as an argument          |
-| renderSubmitButton       | takes the submit button component as a renderProp. Example is shown above.       |
+| Props              | description                                                                      |
+| ------------------ | -------------------------------------------------------------------------------- |
+| formSchema         | The json or array of objects of form structure                                   |
+| outerClassName     | a className for the the element that wraps the form fields and the submit button |
+| innerClassName     | a className for the fields container. Usually used to layout the form fields     |
+| submitFormAsync    | submitHandler for the form. Gets the user's valid inputs as an argument          |
+| renderSubmitButton | takes the submit button component as a renderProp. Example is shown above.       |
