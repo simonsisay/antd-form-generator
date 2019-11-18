@@ -1,5 +1,6 @@
 import React from "react";
 import FormGenerator from "./FormGenerator";
+import propTypes from "prop-types";
 
 const FormGeneratorWrapper = ({ children, formSchema }) => {
   let defaultValues = {};
@@ -19,18 +20,18 @@ const FormGeneratorWrapper = ({ children, formSchema }) => {
   return <React.Fragment>{children(defaultValues)}</React.Fragment>;
 };
 
-const AlamaForm = ({
+const AntdFormGenerator = ({
   onSubmit,
   formSchema,
   submitButton,
-  fieldsContainerClassName,
-  containerClassName
+  innerClassName,
+  outerClassName
 }) => (
   <FormGeneratorWrapper formSchema={formSchema}>
     {defaultValues => (
       <FormGenerator
-        fieldsContainerClassName={fieldsContainerClassName}
-        containerClassName={containerClassName}
+        outerClassName={outerClassName}
+        innerClassName={innerClassName}
         formSchema={formSchema}
         defaultValues={defaultValues}
         submitFormAsync={onSubmit}
@@ -40,4 +41,12 @@ const AlamaForm = ({
   </FormGeneratorWrapper>
 );
 
-export default AlamaForm;
+AntdFormGenerator.propTypes = {
+  innerClassName: propTypes.string,
+  outerClassName: propTypes.string,
+  formSchema: propTypes.arrayOf(propTypes.object).isRequired,
+  onSubmit: propTypes.func,
+  submitButton: propTypes.func.isRequired
+};
+
+export default AntdFormGenerator;

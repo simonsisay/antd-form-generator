@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import AlamaForm from "./AlamaForm";
+import AntdFormGenerator from "./AntdFormGenerator";
 import { sampleFormSchema } from "./sampleFormSchema";
 
 ReactDOM.render(
-  <AlamaForm
+  <AntdFormGenerator
     formSchema={sampleFormSchema}
     submitButton={handleSubmit => (
       <button onClick={() => handleSubmit()}>Submit</button>

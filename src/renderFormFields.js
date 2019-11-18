@@ -2,6 +2,8 @@ import React from "react";
 import { Form, Input, Select, InputNumber, DatePicker, Radio } from "antd";
 const { Option } = Select;
 
+//  types: text, number, email, money, percent, select, datepicker, radio
+
 export const renderFormFields = (field, handleChange, errors) => {
   if (field.type === "text") {
     return (

@@ -4,15 +4,13 @@ import useForm from "react-hook-form";
 import "antd/dist/antd.css";
 import { renderFormFields } from "./renderFormFields";
 
-//   types: text, number, email, money, percent, select, datepicker, radio
-//  should populate default ant design props.
-
-const Conditional = ({ field, children, unregister }) => {
+const Conditional = ({ field, children, unregister, register }) => {
   useEffect(() => {
+    register({ name: field.name });
     return () => {
       unregister(field.name);
     };
-  }, [unregister, field]);
+  }, [register, unregister, field]);
   return children;
 };
 
@@ -21,8 +19,8 @@ const FormGenerator = ({
   defaultValues,
   renderSubmitButton,
   submitFormAsync,
-  fieldsContainerClassName,
-  containerClassName
+  innerClassName,
+  outerClassName
 }) => {
   const {
     register,
@@ -58,13 +56,14 @@ const FormGenerator = ({
   };
 
   return (
-    <Form className={containerClassName}>
-      <div className={fieldsContainerClassName}>
+    <Form className={outerClassName}>
+      <div className={innerClassName}>
         {formSchema.map((field, index) => {
           if (field.isConditional === true) {
             const values = watch();
             return values[field.when] === field.is ? (
               <Conditional
+                register={register}
                 field={field}
                 key={field.name}
                 unregister={unregister}
