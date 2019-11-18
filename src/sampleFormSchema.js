@@ -43,11 +43,11 @@ export const sampleFormSchema = [
   },
   {
     type: "money",
-    name: "salary",
+    name: "expense",
     defaultValue: 2000,
     required: true,
     placeholder: "Age",
-    label: "Salary",
+    label: "Expense",
     fieldProps: { disabled: false, style: { width: 300 } },
     validation: {
       required: true,
@@ -127,14 +127,14 @@ export const sampleFormSchema = [
   },
   {
     type: "money",
-    name: "salary",
-    conditional: true,
+    name: "income",
+    isConditional: true,
     when: "employment",
     is: "Employed",
     defaultValue: 0,
     required: true,
     placeholder: "Age",
-    label: "Salary",
+    label: "Income",
     fieldProps: { disabled: false, style: { width: 300 } },
     validation: {
       required: true,
@@ -144,7 +144,7 @@ export const sampleFormSchema = [
   {
     type: "text",
     name: "Company",
-    conditional: true,
+    isConditional: true,
     when: "employment",
     is: "Employed",
     placeholder: "Age",

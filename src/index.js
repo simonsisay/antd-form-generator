@@ -6,10 +6,10 @@ import { sampleFormSchema } from "./sampleFormSchema";
 ReactDOM.render(
   <AlamaForm
     formSchema={sampleFormSchema}
-    renderSubmitButton={handleSubmit => (
+    submitButton={handleSubmit => (
       <button onClick={() => handleSubmit()}>Submit</button>
     )}
-    submitFormAsync={data => {
+    onSubmit={data => {
       console.log(data);
     }}
   />,

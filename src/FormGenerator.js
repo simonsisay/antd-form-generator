@@ -7,6 +7,15 @@ import { renderFormFields } from "./renderFormFields";
 //   types: text, number, email, money, percent, select, datepicker, radio
 //  should populate default ant design props.
 
+const Conditional = ({ field, children, unregister }) => {
+  useEffect(() => {
+    return () => {
+      unregister(field.name);
+    };
+  }, [unregister, field]);
+  return children;
+};
+
 const FormGenerator = ({
   formSchema,
   defaultValues,
@@ -22,7 +31,8 @@ const FormGenerator = ({
     errors,
     formState,
     watch,
-    triggerValidation
+    triggerValidation,
+    unregister
   } = useForm({
     mode: "onSubmit",
     reValidateMode: "onChange",
@@ -47,20 +57,21 @@ const FormGenerator = ({
     return submitFormAsync(data);
   };
 
-  const Conditional = ({ field, children }) => {
-    return watch()[field.when] === field.is ? children : null;
-  };
-
   return (
     <Form className={containerClassName}>
       <div className={fieldsContainerClassName}>
         {formSchema.map((field, index) => {
-          if (field.conditional === true) {
-            return (
-              <Conditional field={field} key={index}>
+          if (field.isConditional === true) {
+            const values = watch();
+            return values[field.when] === field.is ? (
+              <Conditional
+                field={field}
+                key={field.name}
+                unregister={unregister}
+              >
                 {renderFormFields(field, handleChange, errors)}
               </Conditional>
-            );
+            ) : null;
           }
           return (
             <React.Fragment key={index}>

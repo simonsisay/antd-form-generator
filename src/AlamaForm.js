@@ -20,9 +20,9 @@ const FormGeneratorWrapper = ({ children, formSchema }) => {
 };
 
 const AlamaForm = ({
-  submitFormAsync,
+  onSubmit,
   formSchema,
-  renderSubmitButton,
+  submitButton,
   fieldsContainerClassName,
   containerClassName
 }) => (
@@ -33,8 +33,8 @@ const AlamaForm = ({
         containerClassName={containerClassName}
         formSchema={formSchema}
         defaultValues={defaultValues}
-        submitFormAsync={submitFormAsync}
-        renderSubmitButton={handleSubmit => renderSubmitButton(handleSubmit)}
+        submitFormAsync={onSubmit}
+        renderSubmitButton={handleSubmit => submitButton(handleSubmit)}
       />
     )}
   </FormGeneratorWrapper>
