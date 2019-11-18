@@ -111,5 +111,48 @@ export const sampleFormSchema = [
       errorMessage: "Please make sure your input is correct"
     },
     fieldProps: { disabled: false, style: { width: 300 } }
+  },
+  {
+    type: "select",
+    name: "employment",
+    options: ["Employed", "Self Employed", "Unemployed"],
+    required: true,
+    label: "Employment",
+    fieldProps: { disabled: false },
+    groupProps: { allowClear: true, size: "large" },
+    validation: {
+      required: true,
+      errorMessage: "Please make sure your input is correct"
+    }
+  },
+  {
+    type: "money",
+    name: "salary",
+    conditional: true,
+    when: "employment",
+    is: "Employed",
+    defaultValue: 0,
+    required: true,
+    placeholder: "Age",
+    label: "Salary",
+    fieldProps: { disabled: false, style: { width: 300 } },
+    validation: {
+      required: true,
+      errorMessage: "Please make sure your input is correct"
+    }
+  },
+  {
+    type: "text",
+    name: "Company",
+    conditional: true,
+    when: "employment",
+    is: "Employed",
+    placeholder: "Age",
+    label: "Company",
+    fieldProps: { disabled: false, style: { width: 300 } },
+    validation: {
+      required: true,
+      errorMessage: "Please make sure your input is correct"
+    }
   }
 ];
