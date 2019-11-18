@@ -8,11 +8,11 @@ That will a generate an ant design form when given a valid schema.
 ***Usage***
 
 ```javascript
-import AlamaForm from 'alama-form-generator'
+import FormGenerator from 'antd-form-generator'
  
 
 ReactDOM.render(
-  <AlamaForm
+  <FormGenerator
     fieldsContainerClassName={"fields-container"}
     containerClassName={"form-container"}
     formSchema={
