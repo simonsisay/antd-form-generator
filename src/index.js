@@ -1,8 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import FormGenerator from "./FormGenerator";
 import propTypes from "prop-types";
-import { sampleFormSchema } from "./sampleFormSchema";
 
 const FormGeneratorWrapper = ({ children, formSchema }) => {
   let defaultValues = {};
