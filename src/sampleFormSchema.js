@@ -29,6 +29,19 @@ export const sampleFormSchema = [
     }
   },
   {
+    type: "textarea",
+    name: "details",
+    required: true,
+    defaultValue: 21,
+    placeholder: "details",
+    label: "Details",
+    fieldProps: { disabled: false, style: { width: 300 } },
+    validation: {
+      required: true,
+      errorMessage: "Please make sure your input is correct"
+    }
+  },
+  {
     type: "percent",
     name: "profit",
     defaultValue: 20,

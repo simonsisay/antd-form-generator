@@ -1,6 +1,8 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import FormGenerator from "./FormGenerator";
 import propTypes from "prop-types";
+import { sampleFormSchema } from "./sampleFormSchema";
 
 const FormGeneratorWrapper = ({ children, formSchema }) => {
   let defaultValues = {};
@@ -48,5 +50,14 @@ AntdFormGenerator.propTypes = {
   onSubmit: propTypes.func,
   submitButton: propTypes.func.isRequired
 };
+
+// ReactDOM.render(
+//   <AntdFormGenerator
+//     formSchema={sampleFormSchema}
+//     submitButton={handleSubmit => <button onClick={handleSubmit}>Click</button>}
+//     onSubmit={data => console.log(data)}
+//   />,
+//   document.getElementById("root")
+// );
 
 export default AntdFormGenerator;
