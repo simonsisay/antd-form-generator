@@ -57,7 +57,7 @@ AntdFormGenerator.propTypes = {
 //   <AntdFormGenerator
 //     formSchema={sampleFormSchema}
 //     submitButton={handleSubmit => <button onClick={handleSubmit}>Click</button>}
-//     onSubmit={data => console.log(data)}
+//     onSubmit={data =>console.log(data)}
 //   />,
 //   document.getElementById("root")
 // );

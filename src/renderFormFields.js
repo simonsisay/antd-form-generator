@@ -1,16 +1,17 @@
 import React from "react";
-import {
-  Form,
-  Input,
-  Select,
-  InputNumber,
-  DatePicker,
-  Radio,
-  Upload
-} from "antd";
+import { Form, Input, Select, InputNumber, DatePicker, Radio } from "antd";
 const { Option } = Select;
 
-//  types: text, number, email, money, percent, select, datepicker, radio
+//  types: text, number,textarea, email, money, percent, select, datepicker, radio, custom
+
+const errroStyle = {
+  margin: 0,
+  padding: 0,
+  paddingBottom: "2px",
+  border: "1px solid red",
+  width: "fit-content",
+  height: "fit-content"
+};
 
 export const renderFormFields = (field, handleChange, errors) => {
   if (field.type === "text") {
@@ -227,17 +228,17 @@ export const renderFormFields = (field, handleChange, errors) => {
         }
         className={field.containerClassName}
       >
-        <Component
-          onChange={value => handleChange(field.name, value)}
-          name={field.name}
-          value={field.value}
-        />
-      </Form.Item>
-    );
-  } else if (field.type === "file") {
-    return (
-      <Form.Item label={field.label}>
-        <Upload />
+        <div
+          style={
+            errors[field.name] && field.validation ? errroStyle : undefined
+          }
+        >
+          <Component
+            onChange={value => handleChange(field.name, value)}
+            name={field.name}
+            value={field.value}
+          />
+        </div>
       </Form.Item>
     );
   }

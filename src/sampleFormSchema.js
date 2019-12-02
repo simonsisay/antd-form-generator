@@ -1,6 +1,11 @@
 import CustomNumberInput from "./customNumberInput";
 import moment from "moment";
 
+const inputStyles = {
+  width: 300,
+  height: 40
+};
+
 export const sampleFormSchema = [
   {
     type: "text",
@@ -9,7 +14,7 @@ export const sampleFormSchema = [
     required: true,
     placeholder: "First name",
     label: "First name",
-    fieldProps: { disabled: false },
+    fieldProps: { disabled: false, style: inputStyles },
     validation: {
       required: true,
       errorMessage: "Please make sure your input is correct",
