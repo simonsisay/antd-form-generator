@@ -176,7 +176,8 @@ export const sampleFormSchema = [
     component: CustomNumberInput,
     validation: {
       required: true,
-      errorMessage: "Please make sure you entered a valid phone number"
+      errorMessage: "Please make sure you entered a valid phone number",
+      validate: value => value.length > 10
     }
   }
 ];
