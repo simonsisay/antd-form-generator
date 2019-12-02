@@ -1,5 +1,7 @@
 import React from "react";
+// import ReactDOM from "react-dom";
 import FormGenerator from "./FormGenerator";
+// import { sampleFormSchema } from "./sampleFormSchema";
 import propTypes from "prop-types";
 
 const FormGeneratorWrapper = ({ children, formSchema }) => {
@@ -26,20 +28,22 @@ const AntdFormGenerator = ({
   submitButton,
   innerClassName,
   outerClassName
-}) => (
-  <FormGeneratorWrapper formSchema={formSchema}>
-    {defaultValues => (
-      <FormGenerator
-        outerClassName={outerClassName}
-        innerClassName={innerClassName}
-        formSchema={formSchema}
-        defaultValues={defaultValues}
-        submitFormAsync={onSubmit}
-        renderSubmitButton={handleSubmit => submitButton(handleSubmit)}
-      />
-    )}
-  </FormGeneratorWrapper>
-);
+}) => {
+  return (
+    <FormGeneratorWrapper formSchema={formSchema}>
+      {defaultValues => (
+        <FormGenerator
+          outerClassName={outerClassName}
+          innerClassName={innerClassName}
+          formSchema={formSchema}
+          defaultValues={defaultValues}
+          submitFormAsync={onSubmit}
+          renderSubmitButton={handleSubmit => submitButton(handleSubmit)}
+        />
+      )}
+    </FormGeneratorWrapper>
+  );
+};
 
 AntdFormGenerator.propTypes = {
   innerClassName: propTypes.string,

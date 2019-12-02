@@ -45,6 +45,7 @@ const FormGenerator = ({
   }, [register, formSchema]);
 
   const handleChange = async (name, value) => {
+    console.log(name, value);
     await setValue(name, value);
     if (formState.submitCount !== 0) {
       await triggerValidation();

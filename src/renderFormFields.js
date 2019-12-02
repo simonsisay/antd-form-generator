@@ -1,5 +1,13 @@
 import React from "react";
-import { Form, Input, Select, InputNumber, DatePicker, Radio } from "antd";
+import {
+  Form,
+  Input,
+  Select,
+  InputNumber,
+  DatePicker,
+  Radio,
+  Upload
+} from "antd";
 const { Option } = Select;
 
 //  types: text, number, email, money, percent, select, datepicker, radio
@@ -203,6 +211,33 @@ export const renderFormFields = (field, handleChange, errors) => {
           onChange={date => handleChange(field.name, date._d)}
           {...field.fieldProps}
         />
+      </Form.Item>
+    );
+  } else if (field.type === "custom") {
+    const Component = field.component;
+
+    return (
+      <Form.Item
+        label={field.label}
+        validateStatus={errors[field.name] ? "error" : ""}
+        help={
+          errors[field.name] &&
+          field.validation &&
+          field.validation.errorMessage
+        }
+        className={field.containerClassName}
+      >
+        <Component
+          onChange={value => handleChange(field.name, value)}
+          name={field.name}
+          value={field.value}
+        />
+      </Form.Item>
+    );
+  } else if (field.type === "file") {
+    return (
+      <Form.Item label={field.label}>
+        <Upload />
       </Form.Item>
     );
   }

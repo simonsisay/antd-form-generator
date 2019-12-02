@@ -1,3 +1,4 @@
+import CustomNumberInput from "./customNumberInput";
 import moment from "moment";
 
 export const sampleFormSchema = [
@@ -166,6 +167,16 @@ export const sampleFormSchema = [
     validation: {
       required: true,
       errorMessage: "Please make sure your input is correct"
+    }
+  },
+  {
+    type: "custom",
+    name: "phone",
+    label: "Phone",
+    component: CustomNumberInput,
+    validation: {
+      required: true,
+      errorMessage: "Please make sure you entered a valid phone number"
     }
   }
 ];
