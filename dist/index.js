@@ -1,5 +1,7 @@
-import React from "react";
-import FormGenerator from "./FormGenerator";
+import React from "react"; // import ReactDOM from "react-dom";
+
+import FormGenerator from "./FormGenerator"; // import { sampleFormSchema } from "./sampleFormSchema";
+
 import propTypes from "prop-types";
 
 const FormGeneratorWrapper = ({
@@ -28,25 +30,35 @@ const FormGeneratorWrapper = ({
 const AntdFormGenerator = ({
   onSubmit,
   formSchema,
-  submitButton,
+  renderFooter,
   innerClassName,
   outerClassName
-}) => React.createElement(FormGeneratorWrapper, {
-  formSchema: formSchema
-}, defaultValues => React.createElement(FormGenerator, {
-  outerClassName: outerClassName,
-  innerClassName: innerClassName,
-  formSchema: formSchema,
-  defaultValues: defaultValues,
-  submitFormAsync: onSubmit,
-  renderSubmitButton: handleSubmit => submitButton(handleSubmit)
-}));
+}) => {
+  return React.createElement(FormGeneratorWrapper, {
+    formSchema: formSchema
+  }, defaultValues => React.createElement(FormGenerator, {
+    outerClassName: outerClassName,
+    innerClassName: innerClassName,
+    formSchema: formSchema,
+    defaultValues: defaultValues,
+    submitFormAsync: onSubmit,
+    renderSubmitButton: handleSubmit => renderFooter(handleSubmit)
+  }));
+};
 
 AntdFormGenerator.propTypes = {
   innerClassName: propTypes.string,
   outerClassName: propTypes.string,
   formSchema: propTypes.arrayOf(propTypes.object).isRequired,
   onSubmit: propTypes.func,
-  submitButton: propTypes.func.isRequired
-};
+  renderFooter: propTypes.func.isRequired
+}; // ReactDOM.render(
+//   <AntdFormGenerator
+//     formSchema={sampleFormSchema}
+//     renderFooter={handleSubmit => <button onClick={handleSubmit}>Click</button>}
+//     onSubmit={data =>console.log(data)}
+//   />,
+//   document.getElementById("root")
+// );
+
 export default AntdFormGenerator;

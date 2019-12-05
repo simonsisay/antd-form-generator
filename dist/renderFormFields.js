@@ -4,8 +4,16 @@ import React from "react";
 import { Form, Input, Select, InputNumber, DatePicker, Radio } from "antd";
 const {
   Option
-} = Select; //  types: text, number, email, money, percent, select, datepicker, radio
+} = Select; //  types: text, number,textarea, email, money, percent, select, datepicker, radio, custom
 
+const errroStyle = {
+  margin: 0,
+  padding: 0,
+  paddingBottom: "2px",
+  border: "1px solid red",
+  width: "fit-content",
+  height: "fit-content"
+};
 export const renderFormFields = (field, handleChange, errors) => {
   if (field.type === "text") {
     return React.createElement(Form.Item, {
@@ -13,6 +21,17 @@ export const renderFormFields = (field, handleChange, errors) => {
       validateStatus: errors[field.name] ? "error" : "",
       help: errors[field.name] && field.validation.errorMessage
     }, React.createElement(Input, _extends({
+      name: field.name,
+      placeholder: field.placeholder,
+      onChange: e => handleChange(field.name, e.target.value),
+      defaultValue: field.defaultValue
+    }, field.fieldProps)));
+  } else if (field.type === "textarea") {
+    return React.createElement(Form.Item, {
+      label: field.label,
+      validateStatus: errors[field.name] ? "error" : "",
+      help: errors[field.name] && field.validation.errorMessage
+    }, React.createElement(Input.TextArea, _extends({
       name: field.name,
       placeholder: field.placeholder,
       onChange: e => handleChange(field.name, e.target.value),
@@ -127,6 +146,20 @@ export const renderFormFields = (field, handleChange, errors) => {
       defaultValue: field.defaultValue,
       onChange: date => handleChange(field.name, date._d)
     }, field.fieldProps)));
+  } else if (field.type === "custom") {
+    const Component = field.component;
+    return React.createElement(Form.Item, {
+      label: field.label,
+      validateStatus: errors[field.name] ? "error" : "",
+      help: errors[field.name] && field.validation && field.validation.errorMessage,
+      className: field.containerClassName
+    }, React.createElement("div", {
+      style: errors[field.name] && field.validation ? errroStyle : undefined
+    }, React.createElement(Component, {
+      onChange: value => handleChange(field.name, value),
+      name: field.name,
+      value: field.value
+    })));
   }
 
   return null;

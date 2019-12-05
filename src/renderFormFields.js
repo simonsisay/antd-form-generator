@@ -137,6 +137,7 @@ export const renderFormFields = (field, handleChange, errors) => {
           defaultValue={
             field.defaultValue ? field.defaultValue : field.options[0]
           }
+          {...field.fieldProps}
           {...field.groupProps}
         >
           {field.options.map((option, index) => (
