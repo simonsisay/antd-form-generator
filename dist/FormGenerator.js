@@ -63,7 +63,6 @@ const FormGenerator = ({
   };
 
   const submitForm = async data => {
-    await triggerValidation();
     return submitFormAsync(data);
   };
 

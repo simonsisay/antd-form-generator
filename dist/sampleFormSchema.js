@@ -1,8 +1,8 @@
 import CustomNumberInput from "./customNumberInput";
 import moment from "moment";
 const inputStyles = {
-  width: 300,
-  height: 40
+  width: 334,
+  height: 48
 };
 export const sampleFormSchema = [{
   type: "text",

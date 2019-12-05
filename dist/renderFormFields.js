@@ -102,7 +102,7 @@ export const renderFormFields = (field, handleChange, errors) => {
       placeholder: field.placeholder,
       onChange: value => handleChange(field.name, value),
       defaultValue: field.defaultValue ? field.defaultValue : field.options[0]
-    }, field.groupProps), field.options.map((option, index) => React.createElement(Option, _extends({}, field.fieldProps, {
+    }, field.fieldProps, field.groupProps), field.options.map((option, index) => React.createElement(Option, _extends({}, field.fieldProps, {
       value: option,
       key: index
     }), option))));
