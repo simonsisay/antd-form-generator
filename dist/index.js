@@ -60,4 +60,5 @@ AntdFormGenerator.propTypes = {
 //   />,
 //   document.getElementById("root")
 // );
-// export default AntdFormGenerator;
+
+export default AntdFormGenerator;
