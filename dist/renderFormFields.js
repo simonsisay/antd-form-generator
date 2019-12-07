@@ -6,7 +6,7 @@ const {
   Option
 } = Select; //  types: text, number,textarea, email, money, percent, select, datepicker, radio, custom
 
-const errroStyle = {
+const errorStyle = {
   margin: 0,
   padding: 0,
   paddingBottom: "2px",
@@ -154,11 +154,11 @@ export const renderFormFields = (field, handleChange, errors) => {
       help: errors[field.name] && field.validation && field.validation.errorMessage,
       className: field.containerClassName
     }, React.createElement("div", {
-      style: errors[field.name] && field.validation ? errroStyle : undefined
+      style: errors[field.name] && field.validation ? errorStyle : undefined
     }, React.createElement(Component, {
       onChange: value => handleChange(field.name, value),
       name: field.name,
-      value: field.value
+      value: field.defaultValue
     })));
   }
 
