@@ -30,7 +30,7 @@ export const renderFormFields = (field, handleChange, errors) => {
         />
       </Form.Item>
     );
-  } else if (field.type === "password") {
+  } else if (field.type === "passord") {
     return (
       <Form.Item
         label={field.label}
@@ -225,7 +225,7 @@ export const renderFormFields = (field, handleChange, errors) => {
         className={field.containerClassName}
       >
         <DatePicker
-          defaultPickerValue={field.defaultValue}
+          defaultValue={field.defaultValue}
           onChange={date => handleChange(field.name, date._d)}
           {...field.fieldProps}
         />

@@ -225,7 +225,7 @@ export const renderFormFields = (field, handleChange, errors) => {
         className={field.containerClassName}
       >
         <DatePicker
-          defaultPickerValue={field.defaultValue}
+          defaultValue={field.defaultValue}
           onChange={date => handleChange(field.name, date._d)}
           {...field.fieldProps}
         />
