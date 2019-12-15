@@ -30,22 +30,6 @@ export const renderFormFields = (field, handleChange, errors) => {
         />
       </Form.Item>
     );
-  } else if (field.type === "password") {
-    return (
-      <Form.Item
-        label={field.label}
-        validateStatus={errors[field.name] ? "error" : ""}
-        help={errors[field.name] && field.validation.errorMessage}
-      >
-        <Input.Password
-          name={field.name}
-          placeholder={field.placeholder}
-          onChange={e => handleChange(field.name, e.target.value)}
-          defaultValue={field.defaultValue}
-          {...field.fieldProps}
-        />
-      </Form.Item>
-    );
   } else if (field.type === "textarea") {
     return (
       <Form.Item

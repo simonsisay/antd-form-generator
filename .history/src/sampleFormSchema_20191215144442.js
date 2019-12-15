@@ -6,6 +6,8 @@ const inputStyles = {
   height: 48
 };
 
+export const sampleFormSchema = [];
+
 export const sampleFormSchema = [
   {
     type: "text",
