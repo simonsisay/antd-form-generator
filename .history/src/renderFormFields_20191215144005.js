@@ -30,7 +30,7 @@ export const renderFormFields = (field, handleChange, errors) => {
         />
       </Form.Item>
     );
-  } else if (field.type === "password") {
+  } else if (field.type === "passord") {
     return (
       <Form.Item
         label={field.label}

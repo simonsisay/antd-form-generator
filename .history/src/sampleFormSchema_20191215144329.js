@@ -8,11 +8,10 @@ const inputStyles = {
 
 export const sampleFormSchema = [
   {
-    type: "text",
+    type: "password",
     name: "firstName",
-    defaultValue: "Simon",
     required: true,
-    placeholder: "First name",
+    placeholder: "Passoword",
     label: "First name",
     fieldProps: { disabled: false, style: inputStyles },
     validation: {
@@ -20,13 +19,17 @@ export const sampleFormSchema = [
       errorMessage: "Please make sure your input is correct",
       validate: value => value.toString().startsWith("A")
     }
-  },
+  }
+];
+
+export const sampleFormSchema = [
   {
-    type: "password",
+    type: "text",
     name: "firstName",
+    defaultValue: "Simon",
     required: true,
-    placeholder: "Password",
-    label: "Password",
+    placeholder: "First name",
+    label: "First name",
     fieldProps: { disabled: false, style: inputStyles },
     validation: {
       required: true,
