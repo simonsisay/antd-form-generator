@@ -13,7 +13,7 @@ const errorStyle = {
   height: "fit-content"
 };
 
-export const renderFormFields = (field, handleChange, errors) => {
+export const renderFormFields = (field, handleChange, errors, values) => {
   if (field.type === "text") {
     return (
       <Form.Item
@@ -25,7 +25,7 @@ export const renderFormFields = (field, handleChange, errors) => {
           name={field.name}
           placeholder={field.placeholder}
           onChange={e => handleChange(field.name, e.target.value)}
-          defaultValue={field.defaultValue}
+          value={values[field.name]}
           {...field.fieldProps}
         />
       </Form.Item>
@@ -41,7 +41,7 @@ export const renderFormFields = (field, handleChange, errors) => {
           name={field.name}
           placeholder={field.placeholder}
           onChange={e => handleChange(field.name, e.target.value)}
-          defaultValue={field.defaultValue}
+          value={values[field.name]}
           {...field.fieldProps}
         />
       </Form.Item>
@@ -57,7 +57,7 @@ export const renderFormFields = (field, handleChange, errors) => {
           name={field.name}
           placeholder={field.placeholder}
           onChange={e => handleChange(field.name, e.target.value)}
-          defaultValue={field.defaultValue}
+          value={values[field.name]}
           {...field.fieldProps}
         />
       </Form.Item>
@@ -75,7 +75,7 @@ export const renderFormFields = (field, handleChange, errors) => {
           min={field.min}
           placeholder={field.placeholder}
           onChange={value => handleChange(field.name, value)}
-          defaultValue={field.defaultValue}
+          value={values[field.name]}
           {...field.fieldProps}
         />
       </Form.Item>
@@ -93,7 +93,7 @@ export const renderFormFields = (field, handleChange, errors) => {
           type="email"
           name={field.name}
           onChange={e => handleChange(field.name, e.target.value)}
-          defaultValue={field.defaultValue}
+          value={values[field.name]}
           {...field.fieldProps}
         />
       </Form.Item>
@@ -113,7 +113,7 @@ export const renderFormFields = (field, handleChange, errors) => {
           }
           parser={value => value.replace(/\$\s?|(,*)/g, "")}
           onChange={value => handleChange(field.name, value)}
-          defaultValue={field.defaultValue}
+          value={values[field.name]}
           {...field.fieldProps}
         />
       </Form.Item>
@@ -133,7 +133,7 @@ export const renderFormFields = (field, handleChange, errors) => {
           formatter={value => `${value}%`}
           parser={value => value.replace("%", "")}
           onChange={value => handleChange(field.name, value)}
-          defaultValue={field.defaultValue}
+          value={values[field.name]}
           {...field.fieldProps}
         />
       </Form.Item>
@@ -150,9 +150,7 @@ export const renderFormFields = (field, handleChange, errors) => {
           name={field.name}
           placeholder={field.placeholder}
           onChange={value => handleChange(field.name, value)}
-          defaultValue={
-            field.defaultValue ? field.defaultValue : field.options[0]
-          }
+          value={values[field.name] ? values[field.name] : field.options[0]}
           {...field.fieldProps}
           {...field.groupProps}
         >
@@ -181,9 +179,7 @@ export const renderFormFields = (field, handleChange, errors) => {
           onChange={event => {
             handleChange(field.name, event.target.value);
           }}
-          defaultValue={
-            field.defaultValue ? field.defaultValue : field.options[0]
-          }
+          value={values[field.name] ? values[field.name] : field.options[0]}
           {...field.groupProps}
         >
           {field.options.map((option, index) => {
@@ -225,7 +221,7 @@ export const renderFormFields = (field, handleChange, errors) => {
         className={field.containerClassName}
       >
         <DatePicker
-          defaultPickerValue={field.defaultValue}
+          value={values[field.name] ? values[field.name] : field.options[0]}
           onChange={date => handleChange(field.name, date._d)}
           {...field.fieldProps}
         />
@@ -253,7 +249,7 @@ export const renderFormFields = (field, handleChange, errors) => {
           <Component
             onChange={value => handleChange(field.name, value)}
             name={field.name}
-            value={field.defaultValue}
+            value={values[field.name]}
           />
         </div>
       </Form.Item>

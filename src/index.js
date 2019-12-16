@@ -31,16 +31,18 @@ const AntdFormGenerator = ({
 }) => {
   return (
     <FormGeneratorWrapper formSchema={formSchema}>
-      {defaultValues => (
-        <FormGenerator
-          outerClassName={outerClassName}
-          innerClassName={innerClassName}
-          formSchema={formSchema}
-          defaultValues={defaultValues}
-          submitFormAsync={onSubmit}
-          renderSubmitButton={handleSubmit => renderFooter(handleSubmit)}
-        />
-      )}
+      {defaultValues => {
+        return (
+          <FormGenerator
+            outerClassName={outerClassName}
+            innerClassName={innerClassName}
+            formSchema={formSchema}
+            defaultValues={defaultValues}
+            submitFormAsync={onSubmit}
+            renderSubmitButton={handleSubmit => renderFooter(handleSubmit)}
+          />
+        );
+      }}
     </FormGeneratorWrapper>
   );
 };
@@ -53,13 +55,6 @@ AntdFormGenerator.propTypes = {
   renderFooter: propTypes.func.isRequired
 };
 
-// ReactDOM.render(
-//   <AntdFormGenerator
-//     formSchema={sampleFormSchema}
-//     renderFooter={handleSubmit => <button onClick={handleSubmit}>Click</button>}
-//     onSubmit={data => console.log(data)}
-//   />,
-//   document.getElementById("root")
-// );
+// ReactDOM.render(<Form />, document.getElementById("root"));
 
 export default AntdFormGenerator;

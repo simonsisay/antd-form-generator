@@ -21,6 +21,21 @@ export const sampleFormSchema = [{
     validate: value => value.toString().startsWith("A")
   }
 }, {
+  type: "password",
+  name: "firstName",
+  required: true,
+  placeholder: "Password",
+  label: "Password",
+  fieldProps: {
+    disabled: false,
+    style: inputStyles
+  },
+  validation: {
+    required: true,
+    errorMessage: "Please make sure your input is correct",
+    validate: value => value.toString().startsWith("A")
+  }
+}, {
   type: "number",
   name: "age",
   required: true,

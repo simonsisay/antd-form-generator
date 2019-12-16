@@ -44,6 +44,12 @@ const FormGenerator = ({
     });
   }, [register, formSchema]);
 
+  useEffect(() => {
+    Object.keys(defaultValues).forEach(key => {
+      setValue(key, defaultValues[key]);
+    });
+  }, [defaultValues, setValue]);
+
   const handleChange = async (name, value) => {
     await setValue(name, value);
     if (formState.submitCount !== 0) {
@@ -59,8 +65,8 @@ const FormGenerator = ({
     <Form className={outerClassName}>
       <div className={innerClassName}>
         {formSchema.map((field, index) => {
+          const values = watch();
           if (field.isConditional === true) {
-            const values = watch();
             return values[field.when] === field.is ? (
               <Conditional
                 register={register}
@@ -68,13 +74,14 @@ const FormGenerator = ({
                 key={field.name}
                 unregister={unregister}
               >
-                {renderFormFields(field, handleChange, errors)}
+                {renderFormFields(field, handleChange, errors, values)}
               </Conditional>
             ) : null;
           }
+
           return (
             <React.Fragment key={index}>
-              {renderFormFields(field, handleChange, errors)}
+              {renderFormFields(field, handleChange, errors, values)}
             </React.Fragment>
           );
         })}

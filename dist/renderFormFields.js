@@ -26,6 +26,17 @@ export const renderFormFields = (field, handleChange, errors) => {
       onChange: e => handleChange(field.name, e.target.value),
       defaultValue: field.defaultValue
     }, field.fieldProps)));
+  } else if (field.type === "password") {
+    return React.createElement(Form.Item, {
+      label: field.label,
+      validateStatus: errors[field.name] ? "error" : "",
+      help: errors[field.name] && field.validation.errorMessage
+    }, React.createElement(Input.Password, _extends({
+      name: field.name,
+      placeholder: field.placeholder,
+      onChange: e => handleChange(field.name, e.target.value),
+      defaultValue: field.defaultValue
+    }, field.fieldProps)));
   } else if (field.type === "textarea") {
     return React.createElement(Form.Item, {
       label: field.label,
@@ -143,7 +154,7 @@ export const renderFormFields = (field, handleChange, errors) => {
       help: errors[field.name] && field.validation && field.validation.errorMessage,
       className: field.containerClassName
     }, React.createElement(DatePicker, _extends({
-      defaultValue: field.defaultValue,
+      defaultPickerValue: field.defaultValue,
       onChange: date => handleChange(field.name, date._d)
     }, field.fieldProps)));
   } else if (field.type === "custom") {

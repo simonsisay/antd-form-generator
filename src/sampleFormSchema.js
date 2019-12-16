@@ -10,7 +10,6 @@ export const sampleFormSchema = [
   {
     type: "text",
     name: "firstName",
-    defaultValue: "Simon",
     required: true,
     placeholder: "First name",
     label: "First name",
