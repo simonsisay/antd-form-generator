@@ -1,7 +1,7 @@
-import React from "react"; // import ReactDOM from "react-dom";
-
-import FormGenerator from "./FormGenerator"; // import { sampleFormSchema } from "./sampleFormSchema";
-
+import React from "react";
+import ReactDOM from "react-dom";
+import FormGenerator from "./FormGenerator";
+import { sampleFormSchema } from "./sampleFormSchema";
 import propTypes from "prop-types";
 
 const FormGeneratorWrapper = ({
@@ -15,6 +15,12 @@ const FormGeneratorWrapper = ({
       // and they make no interaction with the field the default value should be the one submitted.
       defaultValues = { ...defaultValues,
         [field.name]: field.options[0]
+      };
+    }
+
+    if (!field.defaultValue && field.type === "checkbox") {
+      defaultValues = { ...defaultValues,
+        [field.name]: false
       };
     }
 

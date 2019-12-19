@@ -40,7 +40,9 @@ const FormGenerator = ({
 
   useEffect(() => {
     formSchema.forEach(field => {
-      register({ name: field.name }, { ...field.validation });
+      if (!field.isConditional) {
+        register({ name: field.name }, { ...field.validation });
+      }
     });
   }, [register, formSchema]);
 
