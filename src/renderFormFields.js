@@ -234,7 +234,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
           onChange={e => handleChange(field.name, e.target.checked)}
           {...field.fieldProps}
         >
-          {field.label}
+          {field.checkboxText}
         </Checkbox>
       </Form.Item>
     );
