@@ -1,7 +1,7 @@
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 import React from "react";
-import { Form, Input, Select, InputNumber, DatePicker, Radio } from "antd";
+import { Form, Input, Select, InputNumber, DatePicker, Radio, Checkbox } from "antd";
 const {
   Option
 } = Select; //  types: text, number,textarea, email, money, percent, select, datepicker, radio, custom
@@ -147,6 +147,17 @@ export const renderFormFields = (field, handleChange, errors, values) => {
         value: option
       }, field.fieldProps), option);
     })));
+  } else if (field.type === "checkbox") {
+    return React.createElement(Form.Item, {
+      label: field.label,
+      validateStatus: errors[field.name] ? "error" : "",
+      help: errors[field.name] && field.validation && field.validation.errorMessage,
+      className: field.containerClassName
+    }, React.createElement(Checkbox, _extends({
+      name: field.name,
+      checked: values[field.name],
+      onChange: e => handleChange(field.name, e.target.checked)
+    }, field.fieldProps), field.label));
   } else if (field.type === "date") {
     return React.createElement(Form.Item, {
       label: field.label,

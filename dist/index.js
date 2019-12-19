@@ -4,24 +4,22 @@ import FormGenerator from "./FormGenerator"; // import { sampleFormSchema } from
 
 import propTypes from "prop-types";
 
-const FormGeneratorWrapper = ({
-  children,
-  formSchema
-}) => {
+const FormGeneratorWrapper = ({ children, formSchema }) => {
   let defaultValues = {};
   formSchema.forEach(field => {
-    if (!field.defaultValue && (field.type === "radio" || field.type === "select")) {
+    if (
+      !field.defaultValue &&
+      (field.type === "radio" || field.type === "select")
+    ) {
       // when a user is filling out the form if their choice is the default value
       // and they make no interaction with the field the default value should be the one submitted.
-      defaultValues = { ...defaultValues,
-        [field.name]: field.options[0]
-      };
+      defaultValues = { ...defaultValues, [field.name]: field.options[0] };
+    } else if (!field.defaultValue && field.type === "checkbox") {
+      defaultValues = { ...defaultValues, [field.name]: false };
     }
 
     if (field.defaultValue) {
-      defaultValues = { ...defaultValues,
-        [field.name]: field.defaultValue
-      };
+      defaultValues = { ...defaultValues, [field.name]: field.defaultValue };
     }
   });
   return React.createElement(React.Fragment, null, children(defaultValues));
@@ -34,18 +32,22 @@ const AntdFormGenerator = ({
   innerClassName,
   outerClassName
 }) => {
-  return React.createElement(FormGeneratorWrapper, {
-    formSchema: formSchema
-  }, defaultValues => {
-    return React.createElement(FormGenerator, {
-      outerClassName: outerClassName,
-      innerClassName: innerClassName,
-      formSchema: formSchema,
-      defaultValues: defaultValues,
-      submitFormAsync: onSubmit,
-      renderSubmitButton: handleSubmit => renderFooter(handleSubmit)
-    });
-  });
+  return React.createElement(
+    FormGeneratorWrapper,
+    {
+      formSchema: formSchema
+    },
+    defaultValues => {
+      return React.createElement(FormGenerator, {
+        outerClassName: outerClassName,
+        innerClassName: innerClassName,
+        formSchema: formSchema,
+        defaultValues: defaultValues,
+        submitFormAsync: onSubmit,
+        renderSubmitButton: handleSubmit => renderFooter(handleSubmit)
+      });
+    }
+  );
 };
 
 AntdFormGenerator.propTypes = {
