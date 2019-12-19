@@ -14,7 +14,7 @@ const errorStyle = {
   width: "fit-content",
   height: "fit-content"
 };
-export const renderFormFields = (field, handleChange, errors) => {
+export const renderFormFields = (field, handleChange, errors, values) => {
   if (field.type === "text") {
     return React.createElement(Form.Item, {
       label: field.label,
@@ -24,7 +24,7 @@ export const renderFormFields = (field, handleChange, errors) => {
       name: field.name,
       placeholder: field.placeholder,
       onChange: e => handleChange(field.name, e.target.value),
-      defaultValue: field.defaultValue
+      value: values[field.name]
     }, field.fieldProps)));
   } else if (field.type === "password") {
     return React.createElement(Form.Item, {
@@ -35,7 +35,7 @@ export const renderFormFields = (field, handleChange, errors) => {
       name: field.name,
       placeholder: field.placeholder,
       onChange: e => handleChange(field.name, e.target.value),
-      defaultValue: field.defaultValue
+      value: values[field.name]
     }, field.fieldProps)));
   } else if (field.type === "textarea") {
     return React.createElement(Form.Item, {
@@ -46,7 +46,7 @@ export const renderFormFields = (field, handleChange, errors) => {
       name: field.name,
       placeholder: field.placeholder,
       onChange: e => handleChange(field.name, e.target.value),
-      defaultValue: field.defaultValue
+      value: values[field.name]
     }, field.fieldProps)));
   } else if (field.type === "number") {
     return React.createElement(Form.Item, {
@@ -59,7 +59,7 @@ export const renderFormFields = (field, handleChange, errors) => {
       min: field.min,
       placeholder: field.placeholder,
       onChange: value => handleChange(field.name, value),
-      defaultValue: field.defaultValue
+      value: values[field.name]
     }, field.fieldProps)));
   } else if (field.type === "email") {
     return React.createElement(Form.Item, {
@@ -72,7 +72,7 @@ export const renderFormFields = (field, handleChange, errors) => {
       type: "email",
       name: field.name,
       onChange: e => handleChange(field.name, e.target.value),
-      defaultValue: field.defaultValue
+      value: values[field.name]
     }, field.fieldProps)));
   } else if (field.type === "money") {
     return React.createElement(Form.Item, {
@@ -85,7 +85,7 @@ export const renderFormFields = (field, handleChange, errors) => {
       formatter: value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
       parser: value => value.replace(/\$\s?|(,*)/g, ""),
       onChange: value => handleChange(field.name, value),
-      defaultValue: field.defaultValue
+      value: values[field.name]
     }, field.fieldProps)));
   } else if (field.type === "percent") {
     return React.createElement(Form.Item, {
@@ -100,7 +100,7 @@ export const renderFormFields = (field, handleChange, errors) => {
       formatter: value => `${value}%`,
       parser: value => value.replace("%", ""),
       onChange: value => handleChange(field.name, value),
-      defaultValue: field.defaultValue
+      value: values[field.name]
     }, field.fieldProps)));
   } else if (field.type === "select") {
     return React.createElement(Form.Item, {
@@ -112,7 +112,7 @@ export const renderFormFields = (field, handleChange, errors) => {
       name: field.name,
       placeholder: field.placeholder,
       onChange: value => handleChange(field.name, value),
-      defaultValue: field.defaultValue ? field.defaultValue : field.options[0]
+      value: values[field.name] ? values[field.name] : field.options[0]
     }, field.fieldProps, field.groupProps), field.options.map((option, index) => React.createElement(Option, _extends({}, field.fieldProps, {
       value: option,
       key: index
@@ -128,7 +128,7 @@ export const renderFormFields = (field, handleChange, errors) => {
       onChange: event => {
         handleChange(field.name, event.target.value);
       },
-      defaultValue: field.defaultValue ? field.defaultValue : field.options[0]
+      value: values[field.name] ? values[field.name] : field.options[0]
     }, field.groupProps), field.options.map((option, index) => {
       if (field.groupProps && field.groupProps.buttonStyle === "solid") {
         return React.createElement(Radio.Button, _extends({
@@ -154,7 +154,7 @@ export const renderFormFields = (field, handleChange, errors) => {
       help: errors[field.name] && field.validation && field.validation.errorMessage,
       className: field.containerClassName
     }, React.createElement(DatePicker, _extends({
-      defaultPickerValue: field.defaultValue,
+      value: values[field.name] ? values[field.name] : field.options[0],
       onChange: date => handleChange(field.name, date._d)
     }, field.fieldProps)));
   } else if (field.type === "custom") {
@@ -169,7 +169,7 @@ export const renderFormFields = (field, handleChange, errors) => {
     }, React.createElement(Component, {
       onChange: value => handleChange(field.name, value),
       name: field.name,
-      value: field.defaultValue
+      value: values[field.name]
     })));
   }
 

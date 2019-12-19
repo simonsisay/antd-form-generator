@@ -1,5 +1,13 @@
 import React from "react";
-import { Form, Input, Select, InputNumber, DatePicker, Radio } from "antd";
+import {
+  Form,
+  Input,
+  Select,
+  InputNumber,
+  DatePicker,
+  Radio,
+  Checkbox
+} from "antd";
 const { Option } = Select;
 
 //  types: text, number,textarea, email, money, percent, select, datepicker, radio, custom
@@ -206,6 +214,28 @@ export const renderFormFields = (field, handleChange, errors, values) => {
             );
           })}
         </Radio.Group>
+      </Form.Item>
+    );
+  } else if (field.type === "checkbox") {
+    return (
+      <Form.Item
+        label={field.label}
+        validateStatus={errors[field.name] ? "error" : ""}
+        help={
+          errors[field.name] &&
+          field.validation &&
+          field.validation.errorMessage
+        }
+        className={field.containerClassName}
+      >
+        <Checkbox
+          name={field.name}
+          checked={values[field.name]}
+          onChange={e => handleChange(field.name, e.target.checked)}
+          {...field.fieldProps}
+        >
+          {field.label}
+        </Checkbox>
       </Form.Item>
     );
   } else if (field.type === "date") {

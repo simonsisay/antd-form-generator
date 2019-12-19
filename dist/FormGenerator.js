@@ -53,6 +53,11 @@ const FormGenerator = ({
       });
     });
   }, [register, formSchema]);
+  useEffect(() => {
+    Object.keys(defaultValues).forEach(key => {
+      setValue(key, defaultValues[key]);
+    });
+  }, [defaultValues, setValue]);
 
   const handleChange = async (name, value) => {
     await setValue(name, value);
@@ -71,19 +76,20 @@ const FormGenerator = ({
   }, React.createElement("div", {
     className: innerClassName
   }, formSchema.map((field, index) => {
+    const values = watch();
+
     if (field.isConditional === true) {
-      const values = watch();
       return values[field.when] === field.is ? React.createElement(Conditional, {
         register: register,
         field: field,
         key: field.name,
         unregister: unregister
-      }, renderFormFields(field, handleChange, errors)) : null;
+      }, renderFormFields(field, handleChange, errors, values)) : null;
     }
 
     return React.createElement(React.Fragment, {
       key: index
-    }, renderFormFields(field, handleChange, errors));
+    }, renderFormFields(field, handleChange, errors, values));
   })), renderSubmitButton(handleSubmit(submitForm)));
 };
 
