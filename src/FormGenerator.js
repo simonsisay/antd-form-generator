@@ -6,7 +6,7 @@ import { renderFormFields } from "./renderFormFields";
 
 const Conditional = ({ field, children, unregister, register }) => {
   useEffect(() => {
-    register({ name: field.name });
+    register({ name: field.name }, { ...field.validation });
     return () => {
       unregister(field.name);
     };
