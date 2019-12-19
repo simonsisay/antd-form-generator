@@ -157,7 +157,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
       name: field.name,
       checked: values[field.name],
       onChange: e => handleChange(field.name, e.target.checked)
-    }, field.fieldProps), field.label));
+    }, field.fieldProps), field.checkboxText));
   } else if (field.type === "date") {
     return React.createElement(Form.Item, {
       label: field.label,
