@@ -187,7 +187,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
           onChange={event => {
             handleChange(field.name, event.target.value);
           }}
-          value={values[field.name]}
+          value={values[field.name] ? values[field.name] : field.options[0]}
           {...field.groupProps}
         >
           {field.options.map((option, index) => {
@@ -251,7 +251,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
         className={field.containerClassName}
       >
         <DatePicker
-          value={values[field.name] ? values[field.name] : field.options[0]}
+          value={values[field.name]}
           onChange={date => handleChange(field.name, date._d)}
           {...field.fieldProps}
         />

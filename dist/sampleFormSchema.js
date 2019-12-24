@@ -168,7 +168,6 @@ export const sampleFormSchema = [{
     errorMessage: "Please make sure your input is correct"
   },
   fieldProps: {
-    disabled: false,
     style: {
       width: 300
     }
