@@ -187,7 +187,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
           onChange={event => {
             handleChange(field.name, event.target.value);
           }}
-          value={values[field.name] ? values[field.name] : field.options[0]}
+          value={values[field.name]}
           {...field.groupProps}
         >
           {field.options.map((option, index) => {

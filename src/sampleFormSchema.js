@@ -141,7 +141,7 @@ export const sampleFormSchema = [
       required: true,
       errorMessage: "Please make sure your input is correct"
     },
-    fieldProps: { disabled: false, style: { width: 300 } }
+    fieldProps: { style: { width: 300 } }
   },
   {
     type: "select",

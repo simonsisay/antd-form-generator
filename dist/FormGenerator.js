@@ -13,6 +13,7 @@ const Conditional = ({
   useEffect(() => {
     register({
       name: field.name
+    }, { ...field.validation
     });
     return () => {
       unregister(field.name);
