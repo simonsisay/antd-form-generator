@@ -55,7 +55,7 @@ const FormGenerator = ({
         });
       }
     });
-  }, [register, formSchema]);
+  }, [register, formSchema, errors]);
   useEffect(() => {
     Object.keys(defaultValues).forEach(key => {
       setValue(key, defaultValues[key]);
