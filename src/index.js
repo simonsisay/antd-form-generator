@@ -1,7 +1,7 @@
 import React from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import FormGenerator from "./FormGenerator";
-import { sampleFormSchema } from "./sampleFormSchema";
+// import { sampleFormSchema } from "./sampleFormSchema";
 import propTypes from "prop-types";
 
 const FormGeneratorWrapper = ({ children, formSchema }) => {
@@ -42,7 +42,10 @@ const AntdFormGenerator = ({
             formSchema={formSchema}
             defaultValues={defaultValues}
             submitFormAsync={onSubmit}
-            renderSubmitButton={handleSubmit => renderFooter(handleSubmit)}
+            renderSubmitButton={(handleSubmit, errors) => {
+              console.log(errors);
+              return renderFooter(handleSubmit);
+            }}
           />
         );
       }}
@@ -58,6 +61,14 @@ AntdFormGenerator.propTypes = {
   renderFooter: propTypes.func.isRequired
 };
 
-// ReactDOM.render(<Form />, document.getElementById("root"));
+// ReactDOM.render(
+// //   <AntdFormGenerator
+// //     formSchema={sampleFormSchema}
+// //     renderFooter={handleSubmit => {
+// //       return <button onClick={handleSubmit}>Submit</button>;
+// //     }}
+// //   />,
+// //   document.getElementById("root")
+// // );
 
 export default AntdFormGenerator;

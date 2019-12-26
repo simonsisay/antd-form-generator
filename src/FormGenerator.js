@@ -88,7 +88,7 @@ const FormGenerator = ({
           );
         })}
       </div>
-      {renderSubmitButton(handleSubmit(submitForm))}
+      {renderSubmitButton(handleSubmit(submitForm), errors)}
     </Form>
   );
 };

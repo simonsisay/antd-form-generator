@@ -128,7 +128,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
       onChange: event => {
         handleChange(field.name, event.target.value);
       },
-      value: values[field.name]
+      value: values[field.name] ? values[field.name] : field.options[0]
     }, field.groupProps), field.options.map((option, index) => {
       if (field.groupProps && field.groupProps.buttonStyle === "solid") {
         return React.createElement(Radio.Button, _extends({
@@ -165,7 +165,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
       help: errors[field.name] && field.validation && field.validation.errorMessage,
       className: field.containerClassName
     }, React.createElement(DatePicker, _extends({
-      value: values[field.name] ? values[field.name] : field.options[0],
+      value: values[field.name],
       onChange: date => handleChange(field.name, date._d)
     }, field.fieldProps)));
   } else if (field.type === "custom") {
