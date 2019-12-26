@@ -1,7 +1,7 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import FormGenerator from "./FormGenerator";
-import { sampleFormSchema } from "./sampleFormSchema";
+import React from "react"; // import ReactDOM from "react-dom";
+
+import FormGenerator from "./FormGenerator"; // import { sampleFormSchema } from "./sampleFormSchema";
+
 import propTypes from "prop-types";
 
 const FormGeneratorWrapper = ({
@@ -49,7 +49,10 @@ const AntdFormGenerator = ({
       formSchema: formSchema,
       defaultValues: defaultValues,
       submitFormAsync: onSubmit,
-      renderSubmitButton: handleSubmit => renderFooter(handleSubmit)
+      renderSubmitButton: (handleSubmit, errors) => {
+        console.log(errors);
+        return renderFooter(handleSubmit);
+      }
     });
   });
 };
@@ -60,6 +63,14 @@ AntdFormGenerator.propTypes = {
   formSchema: propTypes.arrayOf(propTypes.object).isRequired,
   onSubmit: propTypes.func,
   renderFooter: propTypes.func.isRequired
-}; // ReactDOM.render(<Form />, document.getElementById("root"));
+}; // ReactDOM.render(
+// //   <AntdFormGenerator
+// //     formSchema={sampleFormSchema}
+// //     renderFooter={handleSubmit => {
+// //       return <button onClick={handleSubmit}>Submit</button>;
+// //     }}
+// //   />,
+// //   document.getElementById("root")
+// // );
 
 export default AntdFormGenerator;

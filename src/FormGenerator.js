@@ -44,7 +44,7 @@ const FormGenerator = ({
         register({ name: field.name }, { ...field.validation });
       }
     });
-  }, [register, formSchema]);
+  }, [register, formSchema, errors]);
 
   useEffect(() => {
     Object.keys(defaultValues).forEach(key => {

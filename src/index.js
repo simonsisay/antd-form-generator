@@ -43,7 +43,6 @@ const AntdFormGenerator = ({
             defaultValues={defaultValues}
             submitFormAsync={onSubmit}
             renderSubmitButton={(handleSubmit, errors) => {
-              console.log(errors);
               return renderFooter(handleSubmit);
             }}
           />

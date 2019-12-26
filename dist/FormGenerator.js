@@ -93,7 +93,7 @@ const FormGenerator = ({
     return React.createElement(React.Fragment, {
       key: index
     }, renderFormFields(field, handleChange, errors, values));
-  })), renderSubmitButton(handleSubmit(submitForm)));
+  })), renderSubmitButton(handleSubmit(submitForm), errors));
 };
 
 export default FormGenerator;
