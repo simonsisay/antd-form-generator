@@ -50,7 +50,7 @@ const AntdFormGenerator = ({
       defaultValues: defaultValues,
       submitFormAsync: onSubmit,
       renderSubmitButton: (handleSubmit, errors) => {
-        return renderFooter(handleSubmit);
+        return renderFooter(handleSubmit, errors);
       }
     });
   });
@@ -63,13 +63,14 @@ AntdFormGenerator.propTypes = {
   onSubmit: propTypes.func,
   renderFooter: propTypes.func.isRequired
 }; // ReactDOM.render(
-// //   <AntdFormGenerator
-// //     formSchema={sampleFormSchema}
-// //     renderFooter={handleSubmit => {
-// //       return <button onClick={handleSubmit}>Submit</button>;
-// //     }}
-// //   />,
-// //   document.getElementById("root")
-// // );
+//   <AntdFormGenerator
+//     formSchema={sampleFormSchema}
+//     renderFooter={(handleSubmit, errors) => {
+//       console.log(errors);
+//       return <button onClick={handleSubmit}>Submit</button>;
+//     }}
+//   />,
+//   document.getElementById("root")
+// );
 
 export default AntdFormGenerator;

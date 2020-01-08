@@ -8,6 +8,7 @@ import {
   Radio,
   Checkbox
 } from "antd";
+import moment from "moment";
 const { Option } = Select;
 
 //  types: text, number,textarea, email, money, percent, select, datepicker, radio, custom
@@ -251,8 +252,10 @@ export const renderFormFields = (field, handleChange, errors, values) => {
         className={field.containerClassName}
       >
         <DatePicker
-          value={values[field.name]}
-          onChange={date => handleChange(field.name, date._d)}
+          value={moment(values[field.name])}
+          onChange={date =>
+            handleChange(field.name, moment(date._d).format(date._f))
+          }
           {...field.fieldProps}
         />
       </Form.Item>
