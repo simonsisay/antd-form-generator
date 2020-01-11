@@ -7,9 +7,9 @@ import { renderFormFields } from "./renderFormFields";
 const Conditional = ({ field, children, unregister, register }) => {
   useEffect(() => {
     register({ name: field.name }, { ...field.validation });
-    return () => {
-      unregister(field.name);
-    };
+    // return () => {
+    //   unregister(field.name);
+    // };
   }, [register, unregister, field]);
   return children;
 };
@@ -44,13 +44,14 @@ const FormGenerator = ({
         register({ name: field.name }, { ...field.validation });
       }
     });
-  }, [register, formSchema, errors]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [register, errors]);
 
-  useEffect(() => {
-    Object.keys(defaultValues).forEach(key => {
-      setValue(key, defaultValues[key]);
-    });
-  }, [defaultValues, setValue]);
+  // useEffect(() => {
+  //   Object.keys(defaultValues).forEach(key => {
+  //     setValue(key, defaultValues[key]);
+  //   });
+  // }, [defaultValues, setValue]);
 
   const handleChange = async (name, value) => {
     await setValue(name, value);
@@ -73,8 +74,8 @@ const FormGenerator = ({
               <Conditional
                 register={register}
                 field={field}
-                key={field.name}
                 unregister={unregister}
+                key={index}
               >
                 {renderFormFields(field, handleChange, errors, values)}
               </Conditional>

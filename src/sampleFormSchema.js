@@ -1,200 +1,145 @@
-import CustomNumberInput from "./customNumberInput";
 import moment from "moment";
 
 const inputStyles = {
   width: 334,
-  height: 48
+  height: 40
 };
 
-export const sampleFormSchema = [
-  {
-    type: "text",
-    name: "firstName",
-    required: true,
-    placeholder: "First name",
-    label: "First name",
-    fieldProps: { disabled: false, style: inputStyles },
-    validation: {
-      required: true,
-      errorMessage: "Please make sure your input is correct",
-      validate: value => value.toString().startsWith("A")
-    }
-  },
-  {
-    type: "password",
-    name: "firstName",
-    required: true,
-    placeholder: "Password",
-    label: "Password",
-    fieldProps: { disabled: false, style: inputStyles },
-    validation: {
-      required: true,
-      errorMessage: "Please make sure your input is correct",
-      validate: value => value.toString().startsWith("A")
-    }
-  },
-  {
-    type: "number",
-    name: "age",
-    required: true,
-    defaultValue: 21,
-    placeholder: "Age",
-    label: "Age",
-    fieldProps: { disabled: false, style: { width: 300 } },
-    validation: {
-      required: true,
-      errorMessage: "Please make sure your input is correct"
-    }
-  },
-  {
-    type: "textarea",
-    name: "details",
-    required: true,
-    defaultValue: 21,
-    placeholder: "details",
-    label: "Details",
-    fieldProps: { disabled: false, style: { width: 300 } },
-    validation: {
-      required: true,
-      errorMessage: "Please make sure your input is correct"
-    }
-  },
-  {
-    type: "percent",
-    name: "profit",
-    defaultValue: 20,
-    required: true,
-    placeholder: "Age",
-    label: "Profit",
-    fieldProps: { disabled: false, style: { width: 300 } },
-    validation: {
-      required: true,
-      errorMessage: "Please make sure your input is correct"
-    }
-  },
+const radioStyle = {
+  textAlign: "center",
+  borderColor: "#51BAF7"
+};
+
+const employmentDetailsForm = [
   {
     type: "money",
-    name: "expense",
-    defaultValue: 2000,
-    required: true,
-    placeholder: "Age",
-    label: "Expense",
-    fieldProps: { disabled: false, style: { width: 300 } },
+    label: "Income amount",
+    name: "incomeAmount",
+    fieldProps: { style: inputStyles },
     validation: {
       required: true,
-      errorMessage: "Please make sure your input is correct"
-    }
-  },
-  {
-    type: "email",
-    name: "email",
-    required: true,
-    placeholder: "Email",
-    label: "Email",
-    fieldProps: { disabled: false },
-    validation: {
-      required: true,
-      errorMessage: "Please make sure your input is correct",
-      validate: value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-    }
-  },
-  {
-    type: "select",
-    name: "sex",
-    options: ["Male", "Female"],
-    placeholder: "Gender",
-    required: true,
-    defaultValue: "Female",
-    label: "Gender",
-    fieldProps: { disabled: false },
-    groupProps: { allowClear: true, size: "large" },
-    validation: {
-      required: true,
-      errorMessage: "Please make sure your input is correct"
+      errorMessage: "Please make sure you add a valid amount"
     }
   },
   {
     type: "radio",
-    name: "gender",
-    options: ["Male", "Female"],
-    defaultValue: "Female",
-    placeholder: "Gender",
-    required: true,
-    label: "Gender",
+    name: "frequency",
+    label: "Income frequency",
+    options: ["Weekly", "Fortnightly", "Monthly", "Annually"],
     validation: {
       required: true,
       errorMessage: "Please make sure your input is correct"
     },
-    groupProps: { buttonStyle: "outline", size: "large" },
+    groupProps: { buttonStyle: "solid", size: "large" },
+
+    fieldProps: {
+      style: radioStyle
+    }
+  },
+  {
+    type: "radio",
+    name: "employmentType",
+    options: ["Permanent", "Casual", "Contract"],
+    label: "Employment Type",
+
+    groupProps: { buttonStyle: "solid", size: "large" },
 
     fieldProps: {
       disabled: false,
-      style: { width: 150, textAlign: "center" }
+      style: radioStyle
+    },
+    validation: {
+      required: true,
+      errorMessage: "Invalid option added"
+    }
+  },
+  {
+    type: "radio",
+    name: "tax",
+    label: "Is the income amount stated before or after tax?",
+    options: ["Before tax", "After tax"],
+    groupProps: { buttonStyle: "solid", size: "large" },
+
+    fieldProps: {
+      disabled: false,
+      style: radioStyle
+    },
+
+    validation: {
+      required: true,
+      errorMessage: "Invalid option added"
+    }
+  },
+  {
+    type: "radio",
+    name: "employmentCategory",
+    label: "Employment Category",
+    options: ["Full time", "Part time"],
+    groupProps: { buttonStyle: "solid", size: "large" },
+
+    fieldProps: {
+      disabled: false,
+      style: radioStyle
+    },
+
+    validation: {
+      required: true,
+      errorMessage: "Invalid option added"
     }
   },
   {
     type: "date",
-    label: "Birthday",
-    name: "birthDate",
+    label: "Start Date",
+    name: "employmentFrom",
     defaultValue: moment(new Date(), "YYYY/MM/DD"),
+    fieldProps: { style: inputStyles },
+
     validation: {
       required: true,
-      errorMessage: "Please make sure your input is correct"
-    },
-    fieldProps: { style: { width: 300 } }
-  },
-  {
-    type: "select",
-    name: "employment",
-    options: ["Employed", "Self Employed", "Unemployed"],
-    required: true,
-    label: "Employment",
-    fieldProps: { disabled: false },
-    groupProps: { allowClear: true, size: "large" },
-    validation: {
-      required: true,
-      errorMessage: "Please make sure your input is correct"
-    }
-  },
-  {
-    type: "money",
-    name: "income",
-    isConditional: true,
-    when: "employment",
-    is: "Employed",
-    defaultValue: 0,
-    required: true,
-    placeholder: "Age",
-    label: "Income",
-    fieldProps: { disabled: false, style: { width: 300 } },
-    validation: {
-      required: true,
-      errorMessage: "Please make sure your input is correct"
-    }
-  },
-  {
-    type: "text",
-    name: "Company",
-    isConditional: true,
-    when: "employment",
-    is: "Employed",
-    placeholder: "Age",
-    label: "Company",
-    fieldProps: { disabled: false, style: { width: 300 } },
-    validation: {
-      required: true,
-      errorMessage: "Please make sure your input is correct"
-    }
-  },
-  {
-    type: "custom",
-    name: "phone",
-    label: "Phone",
-    component: CustomNumberInput,
-    validation: {
-      required: true,
-      errorMessage: "Please make sure you entered a valid phone number",
-      validate: value => value.length > 10
+      errorMessage: "Please make sure you added a valid date"
     }
   }
+];
+
+const getConditionalForm = (isConditional, when, is) => {
+  let form = [];
+  employmentDetailsForm.forEach(item => {
+    form = [...form, { ...item, isConditional, is, when }];
+  });
+  return form;
+};
+
+export const sampleFormSchema = [
+  {
+    type: "money",
+    label: "Cash Savings",
+    name: "savings",
+    fieldProps: { style: inputStyles },
+
+    validation: {
+      required: true,
+      errorMessage: "Please make sure you added a valid amount"
+    }
+  },
+  {
+    type: "radio",
+    label: "Income Type",
+    options: ["Employed", "Self Employed", "Other"],
+    name: "employment",
+
+    groupProps: { buttonStyle: "solid", size: "large" },
+
+    fieldProps: {
+      disabled: false,
+      style: radioStyle
+    },
+    validation: {
+      required: true,
+      errorMessage: "Invalid option added"
+    }
+  },
+
+  ...getConditionalForm(true, "employment", "Employed"),
+  ...getConditionalForm(true, "employment", "Self Employed"),
+  ...getConditionalForm(true, "employment", "Other").slice(0, 2)
 ];

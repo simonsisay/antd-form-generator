@@ -2,6 +2,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 import React from "react";
 import { Form, Input, Select, InputNumber, DatePicker, Radio, Checkbox } from "antd";
+import moment from "moment";
 const {
   Option
 } = Select; //  types: text, number,textarea, email, money, percent, select, datepicker, radio, custom
@@ -165,8 +166,9 @@ export const renderFormFields = (field, handleChange, errors, values) => {
       help: errors[field.name] && field.validation && field.validation.errorMessage,
       className: field.containerClassName
     }, React.createElement(DatePicker, _extends({
-      value: values[field.name],
-      onChange: date => handleChange(field.name, date._d)
+      value: moment(values[field.name]),
+      onChange: date => handleChange(field.name, moment(date._d).format(date._f)),
+      defaultValue: moment(field.name)
     }, field.fieldProps)));
   } else if (field.type === "custom") {
     const Component = field.component;
