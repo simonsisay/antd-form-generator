@@ -14,10 +14,9 @@ const Conditional = ({
     register({
       name: field.name
     }, { ...field.validation
-    });
-    return () => {
-      unregister(field.name);
-    };
+    }); // return () => {
+    //   unregister(field.name);
+    // };
   }, [register, unregister, field]);
   return children;
 };
@@ -54,8 +53,8 @@ const FormGenerator = ({
         }, { ...field.validation
         });
       }
-    });
-  }, [register, formSchema, errors]); // useEffect(() => {
+    }); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [register, errors]); // useEffect(() => {
   //   Object.keys(defaultValues).forEach(key => {
   //     setValue(key, defaultValues[key]);
   //   });
