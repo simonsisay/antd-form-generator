@@ -68,7 +68,16 @@ export const sampleFormSchema = [
     label: "Loan type",
     name: "loanType",
     options: ["Home Loan", "Car Loan", "Personal Loan"],
-    unregister: { isNot: "Home Loan", remove: "homePurpose" },
+    unregister: {
+      isNot: "Home Loan",
+      fieldsToRemove: [
+        "homePurpose",
+        "approximateValue",
+        "purchasePostcode",
+        "interestPreference",
+        "additionalRequirements"
+      ]
+    },
     register: { name: "homePurpose", value: "Buying next home" },
     fieldProps: { style: inputStyles },
     validation: {

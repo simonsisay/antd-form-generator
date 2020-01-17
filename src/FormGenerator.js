@@ -117,8 +117,11 @@ const FormGenerator = ({
             field.unregister &&
             values[field.name] !== field.unregister.isNot
           ) {
-            unregister(field.unregister.remove);
-            values = _.omit(values, field.unregister.remove);
+            console.log(field.unregister, "jeeu");
+            field.unregister.fieldsToRemove.forEach(field => {
+              unregister(field);
+              values = _.omit(values, field);
+            });
           }
           if (
             field.unregister &&

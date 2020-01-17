@@ -64,12 +64,11 @@ const FormGenerator = ({
         });
       }
     }); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [register, errors, values]);
-  useEffect(() => {
-    Object.keys(defaultValues).forEach(key => {
-      setValue(key, defaultValues[key]);
-    });
-  }, [defaultValues, setValue]);
+  }, [register, errors, values]); // useEffect(() => {
+  //   Object.keys(defaultValues).forEach(key => {
+  //     setValue(key, defaultValues[key]);
+  //   });
+  // }, [defaultValues, setValue]);
 
   const handleChange = async (name, value) => {
     await setValue(name, value);
