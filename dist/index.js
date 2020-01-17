@@ -1,7 +1,7 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import FormGenerator from "./FormGenerator";
-import { sampleFormSchema } from "./sampleFormSchema";
+import React from "react"; // import ReactDOM from "react-dom";
+
+import FormGenerator from "./FormGenerator"; // import { sampleFormSchema } from "./sampleFormSchema";
+
 import propTypes from "prop-types";
 
 const FormGeneratorWrapper = ({
@@ -66,7 +66,6 @@ AntdFormGenerator.propTypes = {
 //   <AntdFormGenerator
 //     formSchema={sampleFormSchema}
 //     renderFooter={(handleSubmit, errors) => {
-//       console.log(errors);
 //       return <button onClick={handleSubmit}>Submit</button>;
 //     }}
 //     onSubmit={data => {

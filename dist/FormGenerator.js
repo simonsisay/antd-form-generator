@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Form } from "antd";
 import useForm from "react-hook-form";
+import _ from "lodash";
 import "antd/dist/antd.css";
 import { renderFormFields } from "./renderFormFields";
 
@@ -8,16 +9,20 @@ const Conditional = ({
   field,
   children,
   unregister,
-  register
+  register,
+  values
 }) => {
   useEffect(() => {
     register({
       name: field.name
     }, { ...field.validation
-    }); // return () => {
-    //   unregister(field.name);
-    // };
-  }, [register, unregister, field]);
+    });
+    return () => {
+      field.conditions.forEach(condition => {
+        unregister(field[condition.when]);
+      });
+    };
+  }, [register, unregister, field, values]);
   return children;
 };
 
@@ -45,6 +50,11 @@ const FormGenerator = ({
     defaultValues: { ...defaultValues
     }
   });
+  const formValues = watch();
+  let values = formValues;
+  useEffect(() => {
+    console.log(values);
+  }, [values]);
   useEffect(() => {
     formSchema.forEach(field => {
       if (!field.isConditional) {
@@ -54,14 +64,18 @@ const FormGenerator = ({
         });
       }
     }); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [register, errors]); // useEffect(() => {
-  //   Object.keys(defaultValues).forEach(key => {
-  //     setValue(key, defaultValues[key]);
-  //   });
-  // }, [defaultValues, setValue]);
+  }, [register, errors, values]);
+  useEffect(() => {
+    Object.keys(defaultValues).forEach(key => {
+      setValue(key, defaultValues[key]);
+    });
+  }, [defaultValues, setValue]);
 
   const handleChange = async (name, value) => {
     await setValue(name, value);
+    values = { ...values,
+      [name]: value
+    };
 
     if (formState.submitCount !== 0) {
       await triggerValidation();
@@ -72,20 +86,49 @@ const FormGenerator = ({
     return submitFormAsync(data);
   };
 
+  const checkCondition = field => {
+    let shouldRender = false;
+    field.conditions.forEach(condition => {
+      if (values[condition.when] === condition.is) {
+        shouldRender = true;
+      } else {
+        return false;
+      }
+    });
+    return shouldRender;
+  };
+
+  const recoverConditionalData = data => {
+    if (values[data.name]) {} else {
+      values = { ...values,
+        [data.name]: data.value
+      };
+    }
+  };
+
   return React.createElement(Form, {
     className: outerClassName
   }, React.createElement("div", {
     className: innerClassName
   }, formSchema.map((field, index) => {
-    const values = watch();
-
     if (field.isConditional === true) {
-      return values[field.when] === field.is ? React.createElement(Conditional, {
+      const shouldRender = checkCondition(field);
+      return shouldRender ? React.createElement(Conditional, {
         register: register,
         field: field,
         unregister: unregister,
-        key: index
+        key: index,
+        values: values
       }, renderFormFields(field, handleChange, errors, values)) : null;
+    }
+
+    if (field.unregister && values[field.name] !== field.unregister.isNot) {
+      unregister(field.unregister.remove);
+      values = _.omit(values, field.unregister.remove);
+    }
+
+    if (field.unregister && values[field.name] === field.unregister.isNot) {
+      recoverConditionalData(field.register);
     }
 
     return React.createElement(React.Fragment, {
