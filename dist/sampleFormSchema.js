@@ -74,10 +74,16 @@ export const sampleFormSchema = [{
   label: "Loan type",
   name: "loanType",
   options: ["Home Loan", "Car Loan", "Personal Loan"],
-  unregister: {
+  unregister: [{
     isNot: "Home Loan",
-    remove: "homePurpose"
-  },
+    fieldsToRemove: ["homePurpose", "approximateValue", "purchasePostcode", "interestPreference", "additionalRequirements", "currentInterestRate", "loanBalance"]
+  }, {
+    isNot: "Car Loan",
+    fieldsToRemove: ["ageOfCar", "loanSecurity"]
+  }, {
+    isNot: "Personal Loan",
+    fieldsToRemove: ["personalPurpose"]
+  }],
   register: {
     name: "homePurpose",
     value: "Buying next home"
