@@ -99,9 +99,9 @@ const FormGenerator = ({
   const recoverConditionalData = field => {
     if (field.unregister) {
       field.unregister.forEach(unreg => {
-        if (field.unreg && values[field.name] === field.unreg.isNot) if (!values[unreg.register.name]) {
+        if (unreg && values[field.name] === unreg.isNot) if (!values[field.register.name]) {
           values = { ...values,
-            [unreg.register.name]: unreg.register.value
+            [field.register.name]: field.register.value
           };
         }
       });
@@ -119,8 +119,6 @@ const FormGenerator = ({
         }
       });
     }
-
-    console.log(values);
   };
 
   return React.createElement(Form, {
@@ -139,8 +137,8 @@ const FormGenerator = ({
       }, renderFormFields(field, handleChange, errors, values)) : null;
     }
 
-    unregisterFields(field);
     recoverConditionalData(field);
+    unregisterFields(field);
     return React.createElement(React.Fragment, {
       key: index
     }, renderFormFields(field, handleChange, errors, values));

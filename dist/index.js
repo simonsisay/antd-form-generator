@@ -62,15 +62,17 @@ AntdFormGenerator.propTypes = {
   formSchema: propTypes.arrayOf(propTypes.object).isRequired,
   onSubmit: propTypes.func,
   renderFooter: propTypes.func.isRequired
-};
-ReactDOM.render(React.createElement(AntdFormGenerator, {
-  formSchema: sampleFormSchema,
-  renderFooter: (handleSubmit, errors) => {
-    return React.createElement("button", {
-      onClick: handleSubmit
-    }, "Submit");
-  },
-  onSubmit: data => {
-    console.log(data);
-  }
-}), document.getElementById("root")); // export default AntdFormGenerator;
+}; // ReactDOM.render(
+//   <AntdFormGenerator
+//     formSchema={sampleFormSchema}
+//     renderFooter={(handleSubmit, errors) => {
+//       return <button onClick={handleSubmit}>Submit</button>;
+//     }}
+//     onSubmit={data => {
+//       console.log(data);
+//     }}
+//   />,
+//   document.getElementById("root")
+// );
+
+export default AntdFormGenerator;
