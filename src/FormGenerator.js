@@ -45,7 +45,7 @@ const FormGenerator = ({
   let values = formValues;
 
   useEffect(() => {
-    console.log(values);
+    // console.log(values);
   }, [values]);
 
   useEffect(() => {
@@ -87,11 +87,29 @@ const FormGenerator = ({
     return shouldRender;
   };
 
-  const recoverConditionalData = data => {
-    if (values[data.name]) {
-    } else {
-      values = { ...values, [data.name]: data.value };
+  const recoverConditionalData = field => {
+    if (field.unregister) {
+      field.unregister.forEach(unreg => {
+        if (field.unreg && values[field.name] === field.unreg.isNot)
+          if (!values[unreg.register.name]) {
+            values = { ...values, [unreg.register.name]: unreg.register.value };
+          }
+      });
     }
+  };
+
+  const unregisterFields = field => {
+    if (field.unregister) {
+      field.unregister.forEach(unreg => {
+        if (values[field.name] !== unreg.isNot) {
+          unreg.fieldsToRemove.forEach(name => {
+            unregister(name);
+            values = _.omit(values, name);
+          });
+        }
+      });
+    }
+    console.log(values);
   };
 
   return (
@@ -113,22 +131,9 @@ const FormGenerator = ({
             ) : null;
           }
 
-          if (
-            field.unregister &&
-            values[field.name] !== field.unregister.isNot
-          ) {
-            console.log(field.unregister, "jeeu");
-            field.unregister.fieldsToRemove.forEach(field => {
-              unregister(field);
-              values = _.omit(values, field);
-            });
-          }
-          if (
-            field.unregister &&
-            values[field.name] === field.unregister.isNot
-          ) {
-            recoverConditionalData(field.register);
-          }
+          unregisterFields(field);
+          recoverConditionalData(field);
+
           return (
             <React.Fragment key={index}>
               {renderFormFields(field, handleChange, errors, values)}
