@@ -77,6 +77,8 @@ The following are all the available types of form-fields.
 - money
 - percent
 - select
+- textarea
+- custom
 - datepicker
 - radio
   \*\*
@@ -130,7 +132,7 @@ You can pass
 There are two props that we can pass to the component for styling
 
 ```javascript
-<AlamaForm
+<FormGenerator
   // the following props are best suited to do the form layout.
   innerClassName={"fields-container"} // wraps all inputs
   outerClassName={"form-container"} // wraps the whole form including the submit button passed as a render prop
@@ -152,7 +154,7 @@ Other than that, we can pass a style object to each field inside the fieldProps 
 The submitFormAsync prop takes a function that gets the user's inputs as an argument.
 
 ```javascript
-<AlamaForm
+<FormGenerator
   onSubmit={data => {
     // user's valid inputs. this function won't get fired unless all validations have passed.
     console.log(data);
