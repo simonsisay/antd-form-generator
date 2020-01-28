@@ -64,180 +64,60 @@ const loanForms = [
 
 export const sampleFormSchema = [
   {
-    type: "select",
-    label: "Loan type",
-    name: "loanType",
-    options: ["Home Loan", "Car Loan", "Personal Loan"],
+    type: "money",
+    label: "Cash Savings",
+    name: "savings",
+    fieldProps: { style: inputStyles },
+
+    validation: {
+      required: true,
+      errorMessage: "Please make sure you added a valid amount"
+    }
+  },
+  {
+    type: "radio",
+    label: "Income Type",
+    options: ["Employed", "Self Employed", "Other"],
+    name: "employment",
+
+    groupProps: { buttonStyle: "solid", size: "large" },
     unregister: [
       {
-        isNot: "Home Loan",
+        isNot: "Employed",
         fieldsToRemove: [
-          "homePurpose",
-          "approximateValue",
-          "purchasePostcode",
-          "interestPreference",
-          "additionalRequirements",
-          "currentInterestRate",
-          "loanBalance"
+          "employmentCategory",
+          "tax",
+          "employmentForm",
+          "employmentType"
         ]
       },
       {
-        isNot: "Car Loan",
-        fieldsToRemove: ["ageOfCar", "loanSecurity"]
-      },
-      {
-        isNot: "Personal Loan",
-        fieldsToRemove: ["personalPurpose"]
+        isNot: "Self Employed",
+        fieldsToRemove: [
+          "employmentCategory",
+          "tax",
+          "employmentForm",
+          "employmentType"
+        ]
       }
     ],
-    register: { name: "homePurpose", value: "Buying next home" },
-    fieldProps: { style: inputStyles },
-    validation: {
-      required: true,
-      errorMessage: "Invalid option added"
-    }
-  },
-  {
-    type: "select",
-    name: "homePurpose",
-    label: "Loan Purpose",
-    isConditional: true,
-    conditions: [{ when: "loanType", is: "Home Loan" }],
-    fieldProps: { style: inputStyles },
-    options: [
-      "Buying next home",
-      "Refinance",
-      "Investing",
-      "First home buyer",
-      "Construction"
-    ]
-  },
-  ...getConditionalForm(loanForms, true, [
-    { when: "homePurpose", is: "Buying next home" }
-  ]),
-  ...getConditionalForm(loanForms, true, [
-    { when: "homePurpose", is: "Investing" }
-  ]),
-  ...getConditionalForm(loanForms, true, [
-    { when: "homePurpose", is: "First home buyer" }
-  ]),
-  ...getConditionalForm(loanForms, true, [
-    {
-      when: "homePurpose",
-      is: "Construction"
-    }
-  ]),
-  {
-    type: "percent",
-    name: "currentInterestRate",
-    label: "What interest rate are you paying currently?*",
-    isConditional: true,
-    conditions: [{ when: "homePurpose", is: "Refinance" }],
-    fieldProps: { style: inputStyles },
-    validation: {
-      required: true,
-      errorMessage: "Please add your current loan balance"
-    }
-  },
-
-  {
-    type: "select",
-    name: "ageOfCar",
-    label: "Age of car",
-    isConditional: true,
-    conditions: [{ when: "loanType", is: "Car Loan" }],
-    options: ["New", "Used"],
-    fieldProps: { style: inputStyles },
-    validation: {
-      required: true,
-      errorMessage: "Invalid option added"
-    }
-  },
-  {
-    type: "select",
-    name: "loanSecurity",
-    label: "Loan security",
-    isConditional: true,
-    conditions: [{ when: "loanType", is: "Car Loan" }],
-    options: ["Secured", "Unsecured"],
-    fieldProps: { style: inputStyles },
+    fieldProps: {
+      disabled: false,
+      style: radioStyle
+    },
     validation: {
       required: true,
       errorMessage: "Invalid option added"
     }
   },
 
-  {
-    type: "money",
-    name: "loanBalance",
-    label: "Balance on existing loan*",
-    isConditional: true,
-    conditions: [{ when: "homePurpose", is: "Refinance" }],
-    fieldProps: { style: inputStyles },
-    validation: {
-      required: true,
-      errorMessage: "Please add your current loan balance"
-    }
-  },
-  ...getConditionalForm(loanForms, true, [
-    { when: "homePurpose", is: "Refinance" }
+  ...getConditionalForm(employmentDetailsForm, true, [
+    { when: "employment", is: "Employed" }
   ]),
-  {
-    type: "select",
-    name: "personalPurpose",
-    label: "Loan Purpose",
-    isConditional: true,
-    conditions: [{ when: "loanType", is: "Personal Loan" }],
-    fieldProps: { style: inputStyles },
-    options: [
-      "Vehicle Purchase",
-      "Broker Origination Fee",
-      "Boost Cashflow",
-      "Business Starting Up",
-      "Child & Dependent-related Expenses",
-      "Computers, Laptops and Phones",
-      "Cosmetic Laster Treatment",
-      "Council, Water Rates or Body Corporate Fees",
-      "Debt Consolidation",
-      "Dental",
-      "Event Tickets",
-      "Food",
-      "Furniture",
-      "Gifts",
-      "Holiday",
-      "Household Bills",
-      "Insurance Payments",
-      "Medical Bills",
-      "Motorcycle Purchase",
-      "Professional Services",
-      "Purchase Stock/Equipment",
-      "Purchase of Other Assets for Business Use",
-      "Relocation",
-      "Rent",
-      "School Fees",
-      "Short-term Loan Repayment",
-      "Sports Gear",
-      "Tattoo Removal",
-      "Transport & Petrol",
-      "Tuition Fees",
-      "Wedding",
-      "Other"
-    ],
-    validation: {
-      required: true,
-      errorMessage: "Invalid option added"
-    }
-  },
-
-  /******************/
-  {
-    type: "money",
-    label: "Loan Amount",
-    name: "amount",
-    fieldProps: { style: inputStyles },
-    validation: {
-      required: true,
-      errorMessage: "Please make sure you add a valid amount"
-    }
-  }
+  ...getConditionalForm(employmentDetailsForm, true, [
+    { when: "employment", is: "Self Employed" }
+  ]),
+  ...getConditionalForm(employmentDetailsForm, true, [
+    { when: "employment", is: "Other" }
+  ]).slice(0, 2)
 ];

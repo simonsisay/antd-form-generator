@@ -256,7 +256,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
           onChange={date =>
             handleChange(field.name, moment(date._d).format(date._f))
           }
-          defaultValue={moment(field.name)}
+          defaultValue={moment(field.defaultValue)}
           {...field.fieldProps}
         />
       </Form.Item>

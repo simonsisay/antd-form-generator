@@ -97,7 +97,7 @@ const FormGenerator = ({
   };
 
   const recoverConditionalData = field => {
-    if (field.unregister) {
+    if (field.unregister && field.register) {
       field.unregister.forEach(unreg => {
         if (unreg && values[field.name] === unreg.isNot) if (!values[field.register.name]) {
           values = { ...values,
