@@ -180,7 +180,7 @@ Only exposing the click handler function for you.
 
 ## Conditional Fields.
 
-Whenever you have a form field that you want to render conditionally based on another input's value, we can add a property 
+Whenever you have a form field that you want to render conditionally based on another input's value, you can add a property 
 `isConditional:true` on the schema of that field. After that, add a conditons property that expects an array of "condition objects". The Condition Object has two properties. "when" and "is". 
 if we had a this condition object in the conditions array `{when:"firstName", is:"Simon"}`then, that field would only render if the field "firstName" has a value of "Simon".
 
