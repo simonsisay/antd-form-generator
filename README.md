@@ -202,7 +202,7 @@ if we had a this condition object in the conditions array `{when:"firstName", is
   }
   
 ```
-This above field will render only when age is 18. You can add a number of conditoins to the array and that field would only be rendered if all conditions pass.
+This above field will render only when age is 18. You can add a number of conditoins to the array and the field would only render if all conditions pass.
 
 
 
