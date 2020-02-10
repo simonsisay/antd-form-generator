@@ -54,7 +54,7 @@ ReactDOM.render(
       // api call done here
       console.log(data);
     }}
-    submitButton={handleSubmit => (
+    renderFooter={handleSubmit => (
       <button className="button" onClick={() => handleSubmit()}>
         Submit
       </button>
@@ -164,17 +164,47 @@ The submitFormAsync prop takes a function that gets the user's inputs as an argu
 
 \***_Submit Button_**
 
-Submit Button is passed as a renderProp through a prop named: submitButton
+Submit Button is passed as a renderProp through a prop named: renderFooter
 This will allow you to have a button of any type, with your own customized styling and layout.
 Only exposing the click handler function for you.
 
 ```javascript
 <FormGenerator
-  submitButton={handleSubmit => (
+  renderFooter={handleSubmit => (
     <MyButton onClick={() => handleSubmit()}>Submit Form</MyButton>
   )}
 />
 ```
+
+# Advanced Usage
+
+## Conditional Fields.
+
+Whenever you have a form field that you want to render conditionally based on another input's value, we can add a property 
+`isConditional:true` on the schema of that field. After that, add a conditons property that expects an array of "condition objects". The Condition Object has two properties. "when" and "is". 
+if we had a this condition object in the conditions array `{when:"firstName", is:"Simon"}`then, that field would only render if the field "firstName" has a value of "Simon".
+
+
+```
+  {
+    type: "textarea",
+    name: "licenseName",
+    isConditional: true,
+    conditions: [{ when: "age", is: 18 }],
+    fieldProps: {
+      placeholder: "Name/Address/Company on License",
+      style: { ...inputStyle, height: 120 }
+    },
+    validation: {
+      required: true,
+      errorMessage: "Please make sure you added a valid license name"
+    }
+  }
+  
+```
+This above field will render only when age is 18. You can add a number of conditoins to the array and that field would only be rendered if all conditions pass.
+
+
 
 | Props          | description                                                                      |
 | -------------- | -------------------------------------------------------------------------------- |
@@ -182,4 +212,4 @@ Only exposing the click handler function for you.
 | outerClassName | a className for the the element that wraps the form fields and the submit button |
 | innerClassName | a className for the fields container. Usually used to layout the form fields     |
 | onSubmit       | submitHandler for the form. Gets the user's valid inputs as an argument          |
-| submitButton   | takes the submit button component as a renderProp. Example is shown above.       |
+| renderFooter   | takes the submit button component as a renderProp. Example is shown above.       |
