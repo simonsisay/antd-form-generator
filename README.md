@@ -1,4 +1,4 @@
-#antd-form-generator
+# antd-form-generator
 
 This is a simple library built on top of [ant-design](http://ant.design) and [react-hook-form](https://react-hook-form.com)
 That will a generate an ant design form when given a valid schema.
