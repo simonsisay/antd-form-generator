@@ -35,9 +35,9 @@ const formSchema = [
     validation: {
       required: true,
       errorMessage: "Enter a number for this field."
-    }
-    isConditional:true,
-    conditions:[{ when: "employment", is: "Employed" }]
+    },
+    isConditional: true,
+    conditions: [{ when: "employment", is: "Employed" }]
   },
   {
     type: "radio",
@@ -111,5 +111,5 @@ export const sampleFormSchema = [
       required: true,
       errorMessage: "Invalid option added"
     }
-  },
+  }
 ];
