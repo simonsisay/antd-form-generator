@@ -41,9 +41,9 @@ const AntdFormGenerator = ({
             innerClassName={innerClassName}
             formSchema={formSchema}
             defaultValues={defaultValues}
-            submitFormAsync={onSubmit}
-            renderSubmitButton={(handleSubmit, errors) => {
-              return renderFooter(handleSubmit, errors);
+            submitFormAsync={(data, errors) => onSubmit(data, errors)}
+            renderSubmitButton={handleSubmit => {
+              return renderFooter(handleSubmit);
             }}
           />
         );
