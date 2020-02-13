@@ -16,7 +16,7 @@ const getConditionalForm = (array, isConditional, conditions) => {
   return form;
 };
 
-const loanForms = [
+const formSchema = [
   {
     type: "number",
     name: "approximateValue",
@@ -36,6 +36,8 @@ const loanForms = [
       required: true,
       errorMessage: "Enter a number for this field."
     }
+    isConditional:true,
+    conditions:[{ when: "employment", is: "Employed" }]
   },
   {
     type: "radio",
@@ -110,14 +112,4 @@ export const sampleFormSchema = [
       errorMessage: "Invalid option added"
     }
   },
-
-  ...getConditionalForm(employmentDetailsForm, true, [
-    { when: "employment", is: "Employed" }
-  ]),
-  ...getConditionalForm(employmentDetailsForm, true, [
-    { when: "employment", is: "Self Employed" }
-  ]),
-  ...getConditionalForm(employmentDetailsForm, true, [
-    { when: "employment", is: "Other" }
-  ]).slice(0, 2)
 ];
