@@ -72,7 +72,7 @@ const FormGenerator = ({
   };
 
   const submitForm = async data => {
-    return submitFormAsync(data);
+    return submitFormAsync(data, errors);
   };
 
   const checkCondition = field => {

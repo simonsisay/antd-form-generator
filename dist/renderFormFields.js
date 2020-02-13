@@ -168,7 +168,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
     }, React.createElement(DatePicker, _extends({
       value: moment(values[field.name]),
       onChange: date => handleChange(field.name, moment(date._d).format(date._f)),
-      defaultValue: moment(field.name)
+      defaultValue: moment(field.defaultValue)
     }, field.fieldProps)));
   } else if (field.type === "custom") {
     const Component = field.component;
