@@ -113,7 +113,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
       name: field.name,
       placeholder: field.placeholder,
       onChange: value => handleChange(field.name, value),
-      value: values[field.name] ? values[field.name] : field.options[0]
+      value: field.value || values[field.name] ? values[field.name] : field.options[0]
     }, field.fieldProps, field.groupProps), field.options.map((option, index) => React.createElement(Option, _extends({}, field.fieldProps, {
       value: option,
       key: index
@@ -129,7 +129,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
       onChange: event => {
         handleChange(field.name, event.target.value);
       },
-      value: values[field.name] ? values[field.name] : field.options[0]
+      value: field.value || values[field.name] ? values[field.name] : field.options[0]
     }, field.groupProps), field.options.map((option, index) => {
       if (field.groupProps && field.groupProps.buttonStyle === "solid") {
         return React.createElement(Radio.Button, _extends({
@@ -156,7 +156,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
       className: field.containerClassName
     }, React.createElement(Checkbox, _extends({
       name: field.name,
-      checked: values[field.name],
+      checked: field.value || values[field.name],
       onChange: e => handleChange(field.name, e.target.checked)
     }, field.fieldProps), field.checkboxText));
   } else if (field.type === "date") {
@@ -166,7 +166,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
       help: errors[field.name] && field.validation && field.validation.errorMessage,
       className: field.containerClassName
     }, React.createElement(DatePicker, _extends({
-      value: moment(values[field.name]),
+      value: field.value || moment(values[field.name]),
       onChange: date => handleChange(field.name, moment(date._d).format(date._f)),
       defaultValue: moment(field.defaultValue)
     }, field.fieldProps)));
