@@ -25,7 +25,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
       name: field.name,
       placeholder: field.placeholder,
       onChange: e => handleChange(field.name, e.target.value),
-      value: values[field.name]
+      value: field.value || values[field.name]
     }, field.fieldProps)));
   } else if (field.type === "password") {
     return React.createElement(Form.Item, {
@@ -36,7 +36,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
       name: field.name,
       placeholder: field.placeholder,
       onChange: e => handleChange(field.name, e.target.value),
-      value: values[field.name]
+      value: field.value || values[field.name]
     }, field.fieldProps)));
   } else if (field.type === "textarea") {
     return React.createElement(Form.Item, {
@@ -47,7 +47,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
       name: field.name,
       placeholder: field.placeholder,
       onChange: e => handleChange(field.name, e.target.value),
-      value: values[field.name]
+      value: field.value || values[field.name]
     }, field.fieldProps)));
   } else if (field.type === "number") {
     return React.createElement(Form.Item, {
@@ -60,7 +60,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
       min: field.min,
       placeholder: field.placeholder,
       onChange: value => handleChange(field.name, value),
-      value: values[field.name]
+      value: field.value || values[field.name]
     }, field.fieldProps)));
   } else if (field.type === "email") {
     return React.createElement(Form.Item, {
@@ -73,7 +73,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
       type: "email",
       name: field.name,
       onChange: e => handleChange(field.name, e.target.value),
-      value: values[field.name]
+      value: field.value || values[field.name]
     }, field.fieldProps)));
   } else if (field.type === "money") {
     return React.createElement(Form.Item, {
@@ -86,7 +86,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
       formatter: value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
       parser: value => value.replace(/\$\s?|(,*)/g, ""),
       onChange: value => handleChange(field.name, value),
-      value: values[field.name]
+      value: field.value || values[field.name]
     }, field.fieldProps)));
   } else if (field.type === "percent") {
     return React.createElement(Form.Item, {
@@ -101,7 +101,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
       formatter: value => `${value}%`,
       parser: value => value.replace("%", ""),
       onChange: value => handleChange(field.name, value),
-      value: values[field.name]
+      value: field.value || values[field.name]
     }, field.fieldProps)));
   } else if (field.type === "select") {
     return React.createElement(Form.Item, {

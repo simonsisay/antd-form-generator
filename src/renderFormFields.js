@@ -159,7 +159,11 @@ export const renderFormFields = (field, handleChange, errors, values) => {
           name={field.name}
           placeholder={field.placeholder}
           onChange={value => handleChange(field.name, value)}
-          value={values[field.name] ? values[field.name] : field.options[0]}
+          value={
+            field.value || values[field.name]
+              ? values[field.name]
+              : field.options[0]
+          }
           {...field.fieldProps}
           {...field.groupProps}
         >
@@ -188,7 +192,11 @@ export const renderFormFields = (field, handleChange, errors, values) => {
           onChange={event => {
             handleChange(field.name, event.target.value);
           }}
-          value={values[field.name] ? values[field.name] : field.options[0]}
+          value={
+            field.value || values[field.name]
+              ? values[field.name]
+              : field.options[0]
+          }
           {...field.groupProps}
         >
           {field.options.map((option, index) => {
@@ -231,7 +239,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
       >
         <Checkbox
           name={field.name}
-          checked={values[field.name]}
+          checked={field.value || values[field.name]}
           onChange={e => handleChange(field.name, e.target.checked)}
           {...field.fieldProps}
         >
@@ -252,7 +260,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
         className={field.containerClassName}
       >
         <DatePicker
-          value={moment(values[field.name])}
+          value={field.value || moment(values[field.name])}
           onChange={date =>
             handleChange(field.name, moment(date._d).format(date._f))
           }
