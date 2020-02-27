@@ -1,6 +1,6 @@
 {
   "name": "antd-form-generator",
-  "version": "0.0.44",
+  "version": "0.0.45",
   "private": false,
   "license": "MIT",
   "main": "dist/index.js",
@@ -20,8 +20,6 @@
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
     "react-hook-form": "^3.27.0",
     "react-scripts": "3.2.0"
   },
@@ -53,5 +51,9 @@
     },
     "componentsDefaultDirectory": "components/{name}",
     "packageManager": "npm"
+  },
+  "devDependencies": {
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
   }
 }
