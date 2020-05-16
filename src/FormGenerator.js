@@ -9,7 +9,7 @@ const Conditional = ({ field, children, unregister, register, values }) => {
   useEffect(() => {
     register({ name: field.name }, { ...field.validation });
     return () => {
-      field.conditions.forEach(condition => {
+      field.conditions.forEach((condition) => {
         unregister(field[condition.when]);
       });
     };
@@ -23,7 +23,7 @@ const FormGenerator = ({
   renderSubmitButton,
   submitFormAsync,
   innerClassName,
-  outerClassName
+  outerClassName,
 }) => {
   const {
     register,
@@ -33,12 +33,13 @@ const FormGenerator = ({
     formState,
     watch,
     triggerValidation,
-    unregister
+    unregister,
+    setError,
   } = useForm({
     mode: "onSubmit",
     reValidateMode: "onChange",
     submitFocusError: true,
-    defaultValues: { ...defaultValues }
+    defaultValues: { ...defaultValues },
   });
 
   const formValues = watch();
@@ -49,7 +50,7 @@ const FormGenerator = ({
   }, [values]);
 
   useEffect(() => {
-    formSchema.forEach(field => {
+    formSchema.forEach((field) => {
       if (!field.isConditional) {
         register({ name: field.name }, { ...field.validation });
       }
@@ -71,13 +72,13 @@ const FormGenerator = ({
     }
   };
 
-  const submitForm = async data => {
+  const submitForm = async (data) => {
     return submitFormAsync(data);
   };
 
-  const checkCondition = field => {
+  const checkCondition = (field) => {
     let shouldRender = false;
-    field.conditions.forEach(condition => {
+    field.conditions.forEach((condition) => {
       if (values[condition.when] === condition.is) {
         shouldRender = true;
       } else {
@@ -87,9 +88,9 @@ const FormGenerator = ({
     return shouldRender;
   };
 
-  const recoverConditionalData = field => {
+  const recoverConditionalData = (field) => {
     if (field.unregister && field.register) {
-      field.unregister.forEach(unreg => {
+      field.unregister.forEach((unreg) => {
         if (unreg && values[field.name] === unreg.isNot)
           if (!values[field.register.name]) {
             values = { ...values, [field.register.name]: field.register.value };
@@ -98,11 +99,11 @@ const FormGenerator = ({
     }
   };
 
-  const unregisterFields = field => {
+  const unregisterFields = (field) => {
     if (field.unregister) {
-      field.unregister.forEach(unreg => {
+      field.unregister.forEach((unreg) => {
         if (values[field.name] !== unreg.isNot) {
-          unreg.fieldsToRemove.forEach(name => {
+          unreg.fieldsToRemove.forEach((name) => {
             unregister(name);
             values = _.omit(values, name);
           });
@@ -140,7 +141,7 @@ const FormGenerator = ({
           );
         })}
       </div>
-      {renderSubmitButton(handleSubmit(submitForm), errors)}
+      {renderSubmitButton(handleSubmit(submitForm), errors, setError)}
     </Form>
   );
 };

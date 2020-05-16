@@ -6,7 +6,7 @@ import propTypes from "prop-types";
 
 const FormGeneratorWrapper = ({ children, formSchema }) => {
   let defaultValues = {};
-  formSchema.forEach(field => {
+  formSchema.forEach((field) => {
     if (
       !field.defaultValue &&
       (field.type === "radio" || field.type === "select")
@@ -30,11 +30,11 @@ const AntdFormGenerator = ({
   formSchema,
   renderFooter,
   innerClassName,
-  outerClassName
+  outerClassName,
 }) => {
   return (
     <FormGeneratorWrapper formSchema={formSchema}>
-      {defaultValues => {
+      {(defaultValues) => {
         return (
           <FormGenerator
             outerClassName={outerClassName}
@@ -42,8 +42,8 @@ const AntdFormGenerator = ({
             formSchema={formSchema}
             defaultValues={defaultValues}
             submitFormAsync={onSubmit}
-            renderSubmitButton={(handleSubmit, errors) => {
-              return renderFooter(handleSubmit, errors);
+            renderSubmitButton={(handleSubmit, errors, setError) => {
+              return renderFooter(handleSubmit, errors, setError);
             }}
           />
         );
@@ -57,7 +57,7 @@ AntdFormGenerator.propTypes = {
   outerClassName: propTypes.string,
   formSchema: propTypes.arrayOf(propTypes.object).isRequired,
   onSubmit: propTypes.func,
-  renderFooter: propTypes.func.isRequired
+  renderFooter: propTypes.func.isRequired,
 };
 
 // ReactDOM.render(
