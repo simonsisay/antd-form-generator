@@ -122,6 +122,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
           }
           parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
           onChange={(value) => handleChange(field.name, value)}
+          defaultValue={values[field.name]}
           {...field.fieldProps}
         />
       </Form.Item>

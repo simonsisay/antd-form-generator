@@ -68,7 +68,7 @@ AntdFormGenerator.propTypes = {
 //     renderFooter={(handleSubmit, errors) => {
 //       return <button onClick={handleSubmit}>Submit</button>;
 //     }}
-//     onSubmit={data => {
+//     onSubmit={(data) => {
 //       console.log(data);
 //     }}
 //   />,

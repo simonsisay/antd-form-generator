@@ -85,15 +85,13 @@ export const renderFormFields = (field, handleChange, errors, values) => {
       name: field.name,
       formatter: value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
       parser: value => value.replace(/\$\s?|(,*)/g, ""),
-      onChange: value => handleChange(field.name, value),
-      value: values[field.name]
+      onChange: value => handleChange(field.name, value)
     }, field.fieldProps)));
   } else if (field.type === "percent") {
     return React.createElement(Form.Item, {
       label: field.label,
       validateStatus: errors[field.name] ? "error" : "",
-      help: errors[field.name] && field.validation.errorMessage,
-      className: field.containerClassName
+      help: errors[field.name] && field.validation.errorMessage
     }, React.createElement(InputNumber, _extends({
       name: field.name,
       min: 0,
