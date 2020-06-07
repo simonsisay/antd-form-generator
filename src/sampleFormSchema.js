@@ -1,6 +1,6 @@
 const inputStyles = {
   width: 334,
-  height: 40
+  height: 40,
 };
 
 // const radioStyle = {
@@ -74,9 +74,9 @@ export const sampleFormSchema = [
 
     validation: {
       required: true,
-      errorMessage: "Please make sure you added a valid amount"
-    }
-  }
+      errorMessage: "Please make sure you added a valid amount",
+    },
+  },
   // {
   //   type: "radio",
   //   label: "Income Type",

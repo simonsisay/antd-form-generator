@@ -1,6 +1,6 @@
 {
   "name": "antd-form-generator",
-  "version": "0.0.45",
+  "version": "0.0.47",
   "private": false,
   "license": "MIT",
   "main": "dist/index.js",

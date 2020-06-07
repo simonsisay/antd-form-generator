@@ -42,7 +42,8 @@ const FormGenerator = ({
     formState,
     watch,
     triggerValidation,
-    unregister
+    unregister,
+    setError
   } = useForm({
     mode: "onSubmit",
     reValidateMode: "onChange",
@@ -142,7 +143,7 @@ const FormGenerator = ({
     return React.createElement(React.Fragment, {
       key: index
     }, renderFormFields(field, handleChange, errors, values));
-  })), renderSubmitButton(handleSubmit(submitForm), errors));
+  })), renderSubmitButton(handleSubmit(submitForm), errors, setError));
 };
 
 export default FormGenerator;

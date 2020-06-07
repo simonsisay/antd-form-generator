@@ -6,7 +6,7 @@ import {
   InputNumber,
   DatePicker,
   Radio,
-  Checkbox
+  Checkbox,
 } from "antd";
 import moment from "moment";
 const { Option } = Select;
@@ -19,7 +19,7 @@ const errorStyle = {
   paddingBottom: "2px",
   border: "1px solid red",
   width: "fit-content",
-  height: "fit-content"
+  height: "fit-content",
 };
 
 export const renderFormFields = (field, handleChange, errors, values) => {
@@ -33,7 +33,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
         <Input
           name={field.name}
           placeholder={field.placeholder}
-          onChange={e => handleChange(field.name, e.target.value)}
+          onChange={(e) => handleChange(field.name, e.target.value)}
           value={values[field.name]}
           {...field.fieldProps}
         />
@@ -49,7 +49,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
         <Input.Password
           name={field.name}
           placeholder={field.placeholder}
-          onChange={e => handleChange(field.name, e.target.value)}
+          onChange={(e) => handleChange(field.name, e.target.value)}
           value={values[field.name]}
           {...field.fieldProps}
         />
@@ -65,7 +65,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
         <Input.TextArea
           name={field.name}
           placeholder={field.placeholder}
-          onChange={e => handleChange(field.name, e.target.value)}
+          onChange={(e) => handleChange(field.name, e.target.value)}
           value={values[field.name]}
           {...field.fieldProps}
         />
@@ -83,7 +83,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
           max={field.max}
           min={field.min}
           placeholder={field.placeholder}
-          onChange={value => handleChange(field.name, value)}
+          onChange={(value) => handleChange(field.name, value)}
           value={values[field.name]}
           {...field.fieldProps}
         />
@@ -101,7 +101,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
           placeholder={field.placeholder}
           type="email"
           name={field.name}
-          onChange={e => handleChange(field.name, e.target.value)}
+          onChange={(e) => handleChange(field.name, e.target.value)}
           value={values[field.name]}
           {...field.fieldProps}
         />
@@ -117,12 +117,11 @@ export const renderFormFields = (field, handleChange, errors, values) => {
       >
         <InputNumber
           name={field.name}
-          formatter={value =>
+          formatter={(value) =>
             `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
           }
-          parser={value => value.replace(/\$\s?|(,*)/g, "")}
-          onChange={value => handleChange(field.name, value)}
-          value={values[field.name]}
+          parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
+          onChange={(value) => handleChange(field.name, value)}
           {...field.fieldProps}
         />
       </Form.Item>
@@ -133,15 +132,14 @@ export const renderFormFields = (field, handleChange, errors, values) => {
         label={field.label}
         validateStatus={errors[field.name] ? "error" : ""}
         help={errors[field.name] && field.validation.errorMessage}
-        className={field.containerClassName}
       >
         <InputNumber
           name={field.name}
           min={0}
           max={100}
-          formatter={value => `${value}%`}
-          parser={value => value.replace("%", "")}
-          onChange={value => handleChange(field.name, value)}
+          formatter={(value) => `${value}%`}
+          parser={(value) => value.replace("%", "")}
+          onChange={(value) => handleChange(field.name, value)}
           value={values[field.name]}
           {...field.fieldProps}
         />
@@ -158,7 +156,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
         <Select
           name={field.name}
           placeholder={field.placeholder}
-          onChange={value => handleChange(field.name, value)}
+          onChange={(value) => handleChange(field.name, value)}
           value={values[field.name] ? values[field.name] : field.options[0]}
           {...field.fieldProps}
           {...field.groupProps}
@@ -185,7 +183,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
       >
         <Radio.Group
           name={field.name}
-          onChange={event => {
+          onChange={(event) => {
             handleChange(field.name, event.target.value);
           }}
           value={values[field.name] ? values[field.name] : field.options[0]}
@@ -232,7 +230,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
         <Checkbox
           name={field.name}
           checked={values[field.name]}
-          onChange={e => handleChange(field.name, e.target.checked)}
+          onChange={(e) => handleChange(field.name, e.target.checked)}
           {...field.fieldProps}
         >
           {field.checkboxText}
@@ -253,7 +251,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
       >
         <DatePicker
           value={moment(values[field.name])}
-          onChange={date =>
+          onChange={(date) =>
             handleChange(field.name, moment(date._d).format(date._f))
           }
           defaultValue={moment(field.defaultValue)}
@@ -281,7 +279,7 @@ export const renderFormFields = (field, handleChange, errors, values) => {
           }
         >
           <Component
-            onChange={value => handleChange(field.name, value)}
+            onChange={(value) => handleChange(field.name, value)}
             name={field.name}
             value={values[field.name]}
           />
