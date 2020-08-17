@@ -24,6 +24,7 @@ const FormGenerator = ({
   submitFormAsync,
   innerClassName,
   outerClassName,
+  disableEnter,
 }) => {
   const {
     register,
@@ -112,8 +113,16 @@ const FormGenerator = ({
     }
   };
 
+  console.log("disable", disableEnter);
+
   return (
-    <Form className={outerClassName}>
+    <Form
+      onPress
+      className={outerClassName}
+      onKeyPress={(e) => {
+        e.key === "Enter" && disableEnter && e.preventDefault();
+      }}
+    >
       <div className={innerClassName}>
         {formSchema.map((field, index) => {
           if (field.isConditional === true) {

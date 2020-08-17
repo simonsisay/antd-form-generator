@@ -31,6 +31,7 @@ const AntdFormGenerator = ({
   renderFooter,
   innerClassName,
   outerClassName,
+  disableEnter,
 }) => {
   return (
     <FormGeneratorWrapper formSchema={formSchema}>
@@ -42,6 +43,7 @@ const AntdFormGenerator = ({
             formSchema={formSchema}
             defaultValues={defaultValues}
             submitFormAsync={onSubmit}
+            disableEnter={disableEnter}
             renderSubmitButton={(handleSubmit, errors, setError) => {
               return renderFooter(handleSubmit, errors, setError);
             }}
@@ -58,11 +60,13 @@ AntdFormGenerator.propTypes = {
   formSchema: propTypes.arrayOf(propTypes.object).isRequired,
   onSubmit: propTypes.func,
   renderFooter: propTypes.func.isRequired,
+  disableEnter: propTypes.bool,
 };
 
 // ReactDOM.render(
 //   <AntdFormGenerator
 //     formSchema={sampleFormSchema}
+//     disableEnter={false}
 //     renderFooter={(handleSubmit, errors) => {
 //       return <button onClick={handleSubmit}>Submit</button>;
 //     }}
