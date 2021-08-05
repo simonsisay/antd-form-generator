@@ -1,7 +1,7 @@
-** This library is deprecated **
 
 
-# antd-form-generator
+
+# antd-form-generator(This library is deprecated)
 
 This is a simple library built on top of [ant-design](http://ant.design) and [react-hook-form](https://react-hook-form.com)
 That will generate an ant design form when given a valid schema.
