@@ -8,10 +8,10 @@ That will generate an ant design form when given a valid schema.
 
 **Installation**
   
-  npm install antd-form-generator 
+  ```npm install antd-form-generator```
   
   
-  yarn add antd-form-generator
+  ```yarn add antd-form-generator```
   
 
 
