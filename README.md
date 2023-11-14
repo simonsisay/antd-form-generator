@@ -15,7 +15,7 @@ That will generate an ant design form when given a valid schema.
   
 
 
-**_Usage_**
+**_The Schema_**
 
 ```javascript
 import FormGenerator from "antd-form-generator";
