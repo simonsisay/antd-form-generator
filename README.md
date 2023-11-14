@@ -67,7 +67,7 @@ ReactDOM.render(
 );
 ```
 
-\***\*The Schema\*\***
+**_Usage_**
 
 The form schema should be structured like [this](https://github.com/simonsisay/react-hook-form-antdesign/blob/master/src/sampleFormSchema.js)
 
